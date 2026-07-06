@@ -55,14 +55,14 @@ export function About() {
 
           {/* 冒頭:余白を広く取り、大きく表示 */}
           <Reveal className="mt-16 md:mt-24">
+            {/* 文節単位の inline-block で、中途半端な位置での折り返しを防ぐ */}
             <p className="font-serif text-ivory text-2xl md:text-4xl leading-loose tracking-wider">
-              わずか41歳という生涯の中で、
+              <span className="inline-block">わずか41歳という生涯の中で、</span>
               <br />
-              誰よりも濃く、真摯に
-              <br className="md:hidden" />
-              医療に向き合い続けた
+              <span className="inline-block">誰よりも濃く、</span>
+              <span className="inline-block">真摯に医療に向き合い続けた</span>
               <br />
-              蒲池良平先生。
+              <span className="inline-block">蒲池良平先生。</span>
             </p>
           </Reveal>
 
@@ -87,12 +87,12 @@ export function About() {
           {/* 引用文を大きく表示 */}
           <Reveal className="mt-16 md:mt-24">
             <blockquote className="border-l border-gold/60 pl-6 md:pl-10">
+              {/* 文節単位の inline-block で、中途半端な位置での折り返しを防ぐ */}
               <p className="font-serif text-ivory text-xl md:text-3xl leading-loose tracking-wider">
-                医療は、誰か一人が
-                <br className="md:hidden" />
-                大きなことを成し遂げるだけで
+                <span className="inline-block">医療は、誰か一人が</span>
+                <span className="inline-block">大きなことを成し遂げるだけで</span>
                 <br />
-                成り立つものではありません。
+                <span className="inline-block">成り立つものではありません。</span>
               </p>
             </blockquote>
           </Reveal>
