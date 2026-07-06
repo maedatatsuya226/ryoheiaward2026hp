@@ -15,25 +15,42 @@ const navItems = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const onHome = pathname === "/";
 
-  // ページ遷移時にモバイルメニューを閉じる
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 48);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const useDarkHeader = !onHome || scrolled;
+
   return (
-    <header className="absolute top-0 left-0 right-0 z-50">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        useDarkHeader
+          ? "bg-navy-deep/95 backdrop-blur-md shadow-[0_1px_0_rgba(199,168,107,0.15)]"
+          : "bg-transparent"
+      }`}
+    >
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <div className="flex items-center justify-between py-4 md:py-6">
+        <div className="flex items-center justify-between py-4 md:py-5">
           <Link
             href="/"
-            className="font-serif text-ivory text-lg md:text-xl tracking-wider"
+            className={`font-serif text-lg md:text-xl tracking-wider transition-colors ${
+              useDarkHeader ? "text-ivory" : "text-ivory"
+            }`}
           >
             良平アワード<span className="text-gold-soft">2026</span>
           </Link>
 
-          {/* PCナビゲーション */}
           <nav aria-label="メインナビゲーション" className="hidden md:block">
             <ul className="flex items-center gap-7">
               {navItems.map((item) => (
@@ -50,7 +67,7 @@ export function Header() {
                 <li>
                   <Link
                     href="/awardees/2026"
-                    className="text-sm text-navy bg-gold-soft hover:bg-gold transition-colors rounded-full px-4 py-2"
+                    className="text-sm text-navy bg-gold-soft hover:bg-gold transition-colors rounded-lg px-4 py-2"
                   >
                     受賞者紹介
                   </Link>
@@ -59,7 +76,6 @@ export function Header() {
             </ul>
           </nav>
 
-          {/* モバイルメニューボタン */}
           <button
             type="button"
             className="md:hidden inline-flex flex-col items-center justify-center gap-1.5 w-11 h-11 rounded-md"
@@ -80,12 +96,11 @@ export function Header() {
         </div>
       </div>
 
-      {/* モバイルナビゲーション */}
       {open && (
         <nav
           id="mobile-nav"
           aria-label="メインナビゲーション"
-          className="md:hidden mx-5 rounded-xl bg-navy-deep/95 backdrop-blur px-6 py-5 shadow-lg"
+          className="md:hidden mx-5 mb-4 rounded-xl bg-navy-deep/95 backdrop-blur px-6 py-5 shadow-lg border border-gold/10"
         >
           <ul className="flex flex-col gap-1">
             {navItems.map((item) => (
@@ -103,7 +118,7 @@ export function Header() {
               <li className="pt-2">
                 <Link
                   href="/awardees/2026"
-                  className="inline-block text-navy bg-gold-soft rounded-full px-5 py-2.5"
+                  className="inline-block text-navy bg-gold-soft rounded-lg px-5 py-2.5"
                   onClick={() => setOpen(false)}
                 >
                   受賞者紹介

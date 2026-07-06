@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { siteStatus } from "@/data/site";
+import { eventInfo, siteStatus } from "@/data/site";
 
 /**
  * ファーストビュー。
@@ -13,16 +13,15 @@ export function Hero() {
       aria-label="良平アワード2026"
       className="relative min-h-svh flex items-center justify-center overflow-hidden bg-navy"
     >
-      {/* 背景プレースホルダー:柔らかな光のグラデーション(実写真差し替え前提)
-          将来実写真を使う場合は .slow-zoom が付いた層の中に next/image(fill)を置くと
-          このごく弱いスローズームがそのまま適用される。 */}
+      {/* 背景プレースホルダー:柔らかな光のグラデーション(実写真差し替え前提) */}
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
         <div className="slow-zoom absolute inset-0 bg-gradient-to-b from-navy-deep via-navy to-navy-soft" />
+        <div className="hero-rays absolute inset-0" />
         <div
           className="hero-light absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(223, 207, 170, 0.22), transparent 70%)",
+              "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(223, 207, 170, 0.28), transparent 70%)",
           }}
         />
         <div
@@ -35,7 +34,6 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-5 py-28 md:py-32 text-center">
-        {/* ロゴ(背景透過PNG。枠や影は付けず、ヒーロー背景にそのまま重ねる) */}
         <div className="hero-enter mx-auto mb-8 w-56 md:w-72">
           <Image
             src="/logo/ryohei-award-2026.png"
@@ -47,10 +45,10 @@ export function Hero() {
         </div>
 
         <div className="hero-enter" style={{ animationDelay: "160ms" }}>
-          <p className="text-gold-soft text-sm md:text-base tracking-[0.4em] uppercase">
-            Ryohei Award
+          <p className="inline-block rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-gold-soft text-xs md:text-sm tracking-[0.25em] uppercase">
+            {eventInfo.venue}
           </p>
-          <h1 className="mt-4 text-ivory text-3xl md:text-5xl tracking-widest">
+          <h1 className="mt-5 text-ivory text-3xl md:text-5xl tracking-widest">
             良平アワード2026
           </h1>
         </div>
@@ -64,10 +62,12 @@ export function Hero() {
           日々の行いに光を。
         </p>
         <p
-          className="hero-enter mt-6 text-ivory/80 text-sm md:text-base tracking-wider"
+          className="hero-enter mt-6 text-ivory/85 text-sm md:text-lg tracking-wide max-w-xl mx-auto leading-relaxed"
           style={{ animationDelay: "560ms" }}
         >
-          今日ここにいる全員が、その志の継承者です。
+          仲間とともに、誠実な行いを称える一日。
+          <br className="hidden md:inline" />
+          その日が、もうすぐここに訪れます。
         </p>
 
         <div
@@ -76,21 +76,22 @@ export function Hero() {
         >
           <Link
             href="/#overview"
-            className="inline-block rounded-full bg-gold-soft text-navy px-8 py-3.5 text-sm md:text-base tracking-wider hover:bg-gold transition-colors"
+            className="btn-primary inline-block rounded-lg bg-gold-soft text-navy px-8 py-3.5 text-sm md:text-base tracking-wider hover:bg-gold transition-colors"
           >
             開催概要を見る
           </Link>
           {siteStatus.awardeesPublished ? (
             <Link
               href="/awardees/2026"
-              className="inline-block rounded-full border border-ivory/50 text-ivory px-8 py-3.5 text-sm md:text-base tracking-wider hover:border-gold-soft hover:text-gold-soft transition-colors"
+              className="inline-block rounded-lg border border-ivory/50 text-ivory px-8 py-3.5 text-sm md:text-base tracking-wider hover:border-gold-soft hover:text-gold-soft transition-colors"
             >
               受賞者を見る
             </Link>
           ) : (
-            <p className="text-ivory/60 text-sm px-4 py-3.5">
-              受賞者は当日発表します
-            </p>
+            <span className="inline-flex items-center gap-2 rounded-lg border border-ivory/20 bg-ivory/5 px-6 py-3.5 text-ivory/80 text-sm">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-soft" />
+              受賞者は当日発表
+            </span>
           )}
         </div>
       </div>

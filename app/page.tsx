@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { EventAnticipation } from "@/components/sections/EventAnticipation";
 import { About } from "@/components/sections/About";
 import { RyoheiProfile } from "@/components/sections/RyoheiProfile";
 import { Actions } from "@/components/sections/Actions";
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <EventAnticipation />
       <About />
       <RyoheiProfile />
       <Actions />

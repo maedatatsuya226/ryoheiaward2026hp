@@ -118,8 +118,77 @@ h3 {
   border-radius: 9999px;
 }
 
+/* --- ヒーロー背景の光の筋(ごく弱く) --- */
+.hero-rays {
+  background:
+    linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(223, 207, 170, 0.04) 48%,
+      transparent 56%
+    ),
+    linear-gradient(
+      75deg,
+      transparent 30%,
+      rgba(223, 207, 170, 0.03) 38%,
+      transparent 46%
+    );
+}
+
+/* --- 開催予告帯の微かな shimmer --- */
+.anticipation-shimmer {
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(223, 207, 170, 0.06) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .anticipation-shimmer {
+    animation: anticipationShimmer 8s ease-in-out infinite alternate;
+  }
+  @keyframes anticipationShimmer {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+/* --- プライマリボタンの控えめな glow --- */
+.btn-primary {
+  box-shadow: 0 4px 24px rgba(199, 168, 107, 0.2);
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 32px rgba(199, 168, 107, 0.35);
+}
+
+/* --- 点滅(控えめ) --- */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-pulse-soft {
+    animation: pulseSoft 2.4s ease-in-out infinite;
+  }
+  @keyframes pulseSoft {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .animate-pulse-soft {
+    opacity: 0.8;
   }
 }

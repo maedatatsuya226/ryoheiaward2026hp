@@ -6,8 +6,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 /**
  * 受賞者紹介への導線。
- * 開催前(awardeesPublished: false):「受賞者は当日発表します」のみ表示。
- * 表彰後(true):受賞者名の一部と受賞者ページへのボタンを表示。
  */
 export function AwardeesTeaser() {
   return (
@@ -33,19 +31,31 @@ export function AwardeesTeaser() {
             )}
             <Link
               href="/awardees/2026"
-              className="inline-block rounded-full bg-navy text-ivory px-10 py-4 tracking-wider hover:bg-navy-soft transition-colors"
+              className="btn-primary inline-block rounded-lg bg-navy text-ivory px-10 py-4 tracking-wider hover:bg-navy-soft transition-colors"
             >
               良平アワード2026 受賞者を見る
             </Link>
           </Reveal>
         ) : (
           <Reveal className="mt-12">
-            <p className="font-serif text-navy text-xl md:text-2xl leading-loose">
-              受賞者は当日発表します。
-            </p>
-            <p className="mt-5 text-sm md:text-base text-muted">
-              表彰式の後、このページで受賞者をご紹介します。
-            </p>
+            <div className="relative mx-auto max-w-xl overflow-hidden rounded-2xl border border-gold/20 bg-white px-6 py-10 md:px-10 md:py-12">
+              <div
+                aria-hidden="true"
+                className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent"
+              />
+              <p className="font-serif text-navy text-xl md:text-2xl leading-loose">
+                当日、ここから光ります。
+              </p>
+              <p className="mt-4 text-sm md:text-base text-muted leading-relaxed">
+                受賞者の発表は表彰式のクライマックス。
+                <br className="hidden sm:inline" />
+                その瞬間まで、どうぞお楽しみに。
+              </p>
+              <p className="mt-6 inline-flex items-center gap-2 text-sm text-gold">
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-soft" />
+                表彰後、このページでご紹介します
+              </p>
+            </div>
           </Reveal>
         )}
       </div>

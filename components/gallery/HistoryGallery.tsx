@@ -7,15 +7,25 @@ import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
 
 const AUTOPLAY_INTERVAL_MS = 6000;
 
-/**
- * 過去の授賞式をたどる「写真回廊」。
- * - 1枚を大きめに表示し、左右の写真が少し見切れる
- * - ゆっくり自動送り(ホバー・フォーカス・タップ・ボタンで停止)
- * - スワイプ、前後ボタン、キーボード(左右キー)に対応
- * - prefers-reduced-motion 時は自動再生しない
- * - 写真は data/history.ts の配列から差し替え・追加できる
- */
-export function HistoryGallery() {
+function HistoryGalleryAnticipation() {
+  return (
+    <div className="mx-auto max-w-2xl px-5 md:px-8">
+      <div className="rounded-2xl border border-ivory/15 bg-navy-soft/30 px-6 py-12 md:py-16 text-center">
+        <p className="text-gold-soft text-xs tracking-[0.3em] uppercase">Memories</p>
+        <p className="mt-5 font-serif text-ivory text-xl md:text-2xl leading-loose">
+          これまでの授賞式の思い出が、
+          <br />
+          ここに並びます。
+        </p>
+        <p className="mt-4 text-ivory/70 text-sm md:text-base">
+          過去の写真が用意でき次第、写真回廊として公開します。
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function HistoryGalleryCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -45,7 +55,6 @@ export function HistoryGallery() {
     [reducedMotion],
   );
 
-  // 表示中インデックスをスクロール位置から追従
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
@@ -75,7 +84,6 @@ export function HistoryGallery() {
     };
   }, []);
 
-  // ゆっくり自動送り(停止条件:reduced-motion / 一時停止中 / 非表示タブ)
   useEffect(() => {
     if (reducedMotion || paused) return;
     const id = setInterval(() => {
@@ -110,7 +118,6 @@ export function HistoryGallery() {
       }}
       onTouchStart={() => setPaused(true)}
     >
-      {/* スライド本体 */}
       <div
         ref={trackRef}
         tabIndex={0}
@@ -153,7 +160,6 @@ export function HistoryGallery() {
         ))}
       </div>
 
-      {/* 操作 */}
       <div className="mt-6 flex items-center justify-center gap-4">
         <button
           type="button"
@@ -187,4 +193,13 @@ export function HistoryGallery() {
       </div>
     </div>
   );
+}
+
+/**
+ * 過去の授賞式をたどる「写真回廊」。
+ */
+export function HistoryGallery() {
+  const hasPhotos = historyItems.some((item) => item.image);
+  if (!hasPhotos) return <HistoryGalleryAnticipation />;
+  return <HistoryGalleryCarousel />;
 }
