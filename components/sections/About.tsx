@@ -1,28 +1,28 @@
 import { Reveal } from "@/components/ui/Reveal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
-/** 章マーカー(輪郭数字 + 金の細いライン + 章タイトル) */
+/** 章マーカー(画面端に食い込む巨大な輪郭数字+章タイトル) */
 function ChapterMarker({ number, title }: { number: string; title: string }) {
   return (
-    <div className="flex items-center gap-4">
-      <span className="outline-number text-3xl md:text-4xl leading-none">
+    <div>
+      <span
+        aria-hidden="true"
+        className="outline-number block select-none -ml-6 md:-ml-10 text-[88px] md:text-[140px] leading-[0.85]"
+      >
         {number}
       </span>
-      <span aria-hidden="true" className="h-px w-10 md:w-16 bg-gold/50" />
-      <span className="text-gold-soft text-xs md:text-sm tracking-[0.25em]">
+      <h3 className="mt-1 text-gold-soft text-xs md:text-sm tracking-[0.3em]">
         {title}
-      </span>
+      </h3>
     </div>
   );
 }
 
 /**
- * 良平アワードとは(創設趣旨)。
- * 深いネイビーの上で、3章立てのストーリーとして読ませる。
+ * 良平アワードとは(創設趣旨)。案4aモック準拠。
+ * 冒頭に「そのすべてに、光を。」を掲げ、3章立てで読ませる。
  *  01 蒲池良平先生の生涯と医療への姿勢
  *  02 医療を支えるさまざまな人々
  *  03 良平アワードが担う役割
- * 余白と文字組みを主役にし、スクロールに応じて静かにフェード表示する。
  */
 export function About() {
   return (
@@ -37,14 +37,22 @@ export function About() {
           className="hero-light absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 75% 40% at 50% 38%, rgba(223, 207, 170, 0.10), transparent 70%)",
+              "radial-gradient(ellipse 75% 40% at 50% 20%, rgba(223, 207, 170, 0.1), transparent 70%)",
           }}
         />
       </div>
 
-      <div className="relative mx-auto max-w-3xl px-5 md:px-8 py-24 md:py-36">
-        <Reveal>
-          <SectionHeading label="About" title="良平アワードとは" onDark />
+      <div className="relative mx-auto max-w-3xl px-5 md:px-8 py-20 md:py-28">
+        <h2 className="sr-only">良平アワードとは</h2>
+
+        {/* 冒頭の言葉 */}
+        <Reveal className="text-center pt-6 md:pt-10">
+          <p className="goldtext font-serif text-3xl md:text-5xl leading-relaxed tracking-[0.1em]">
+            そのすべてに、
+            <br className="md:hidden" />
+            光を。
+          </p>
+          <div aria-hidden="true" className="mx-auto mt-10 h-px w-14 bg-gold/50" />
         </Reveal>
 
         {/* ============ 01 蒲池良平先生の生涯と医療への姿勢 ============ */}
@@ -53,56 +61,39 @@ export function About() {
             <ChapterMarker number="01" title="蒲池良平先生の生涯と医療への姿勢" />
           </Reveal>
 
-          {/* 冒頭:余白を広く取り、大きく表示 */}
-          <Reveal className="mt-16 md:mt-24">
+          <Reveal className="mt-10 md:mt-14">
             {/* 文節単位の inline-block で、中途半端な位置での折り返しを防ぐ */}
-            <p className="font-serif text-ivory text-2xl md:text-4xl leading-loose tracking-wider">
+            <p className="font-serif text-ivory text-xl md:text-3xl leading-loose tracking-wider">
               <span className="inline-block">わずか41歳という生涯の中で、</span>
-              <br />
               <span className="inline-block">誰よりも濃く、</span>
               <span className="inline-block">真摯に医療に向き合い続けた</span>
-              <br />
               <span className="inline-block">蒲池良平先生。</span>
             </p>
           </Reveal>
 
-          <Reveal className="mt-14 md:mt-20">
-            <div className="space-y-6 text-ivory/80 text-base md:text-lg leading-loose">
-              <p>
-                良平アワードは、わずか41歳という、決して長くはなかった生涯の中で、誰よりも濃く、真摯に医療に向き合い続けた故・良平先生の精神を継承するために創設されたものです。
-              </p>
-              <p>
-                良平先生は、患者さん一人ひとりに寄り添い、仲間を信じ、現場に立つ者としての誇りと優しさを持って駆け抜けられました。
-              </p>
-            </div>
+          <Reveal className="mt-8 md:mt-10">
+            <p className="text-ivory/80 text-base md:text-lg leading-loose">
+              良平アワードは、その精神を継承するために創設されました。良平先生は、患者さん一人ひとりに寄り添い、仲間を信じ、現場に立つ者としての誇りと優しさを持って駆け抜けられました。
+            </p>
           </Reveal>
         </div>
 
         {/* ============ 02 医療を支えるさまざまな人々 ============ */}
-        <div className="mt-24 md:mt-36">
+        <div className="mt-20 md:mt-28">
           <Reveal>
             <ChapterMarker number="02" title="医療を支えるさまざまな人々" />
           </Reveal>
 
-          {/* 引用文を大きく表示 */}
-          <Reveal className="mt-16 md:mt-24">
-            <blockquote className="border-l border-gold/60 pl-6 md:pl-10">
-              {/* 文節単位の inline-block で、中途半端な位置での折り返しを防ぐ */}
-              <p className="font-serif text-ivory text-xl md:text-3xl leading-loose tracking-wider">
-                <span className="inline-block">医療は、誰か一人が</span>
-                <span className="inline-block">大きなことを成し遂げるだけで</span>
-                <br />
-                <span className="inline-block">成り立つものではありません。</span>
-              </p>
-            </blockquote>
+          <Reveal className="mt-10 md:mt-14">
+            <p className="font-serif text-ivory text-xl md:text-3xl leading-loose tracking-wider">
+              <span className="inline-block">医療は、誰か一人が</span>
+              <span className="inline-block">大きなことを成し遂げるだけで</span>
+              <span className="inline-block">成り立つものではありません。</span>
+            </p>
           </Reveal>
 
-          {/* 4つの言葉を大きなタイポグラフィとして順番に表示。
-              表示の瞬間、文字の背後に柔らかな光が広がり、金の細いラインが静かに伸びる。
-              モバイルは縦書き4本並び(右から読む)、PCは横書きで左右へずらして視線の流れを作る。 */}
-
-          {/* モバイル:縦書き4本並び */}
-          <div className="md:hidden mt-20 flex flex-row-reverse justify-center gap-5 font-serif text-ivory">
+          {/* 4つの言葉:モバイルは縦書き4本並び(右から読む)、PCは横書きで左右へずらす */}
+          <div className="md:hidden mt-14 flex flex-row-reverse items-start justify-center gap-5 font-serif text-ivory">
             {[
               "支える人。",
               "気づく人。",
@@ -112,15 +103,14 @@ export function About() {
               <Reveal key={word} delay={index * 150}>
                 <div className="relative">
                   <span aria-hidden="true" className="light-word-glow" />
-                  {/* vertical-heading は height: max-content のため列折り返しは起きない(引き継ぎ書§5) */}
+                  {/* vertical-heading は height: max-content のため列折り返しは起きない */}
                   <p className="vertical-heading relative text-xl">{word}</p>
                 </div>
               </Reveal>
             ))}
           </div>
 
-          {/* PC:横書き・左右ずらし */}
-          <div className="hidden md:block mt-28 space-y-16 font-serif text-ivory tracking-widest">
+          <div className="hidden md:block mt-20 space-y-14 font-serif text-ivory tracking-widest">
             {[
               { word: "支える人。", offset: "" },
               { word: "気づく人。", offset: "md:ml-[22%]" },
@@ -140,71 +130,36 @@ export function About() {
             ))}
           </div>
 
-          <Reveal className="mt-14 md:mt-20">
-            <p className="text-ivory/70 text-base md:text-lg">
+          <Reveal className="mt-14 md:mt-20 text-center md:text-left">
+            <p className="text-ivory/70 text-sm md:text-lg">
               その全てがあって初めて、医療は成り立ちます。
             </p>
           </Reveal>
         </div>
 
         {/* ============ 03 良平アワードが担う役割 ============ */}
-        <div className="mt-24 md:mt-36">
+        <div className="mt-20 md:mt-28">
           <Reveal>
             <ChapterMarker number="03" title="良平アワードが担う役割" />
           </Reveal>
 
-          {/* 「そのすべてに、光を。」を大きく表示 */}
-          <Reveal className="mt-16 md:mt-24">
-            <div className="relative text-center py-10 md:py-14">
-              {/* 表示の瞬間、背景全体がごくわずかに明るくなる(セクションのoverflow-hidden内に収まる) */}
-              <div
-                aria-hidden="true"
-                className="light-bloom absolute -inset-x-40 -inset-y-24 md:-inset-x-96 md:-inset-y-32"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(223, 207, 170, 0.09), transparent 72%)",
-                }}
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 60% 80% at 50% 50%, rgba(223, 207, 170, 0.12), transparent 70%)",
-                }}
-              />
-              <p className="relative font-serif text-gold-soft text-3xl md:text-5xl leading-relaxed tracking-[0.15em]">
-                そのすべてに、光を。
-              </p>
-            </div>
+          <Reveal className="mt-10 md:mt-14">
+            <p className="text-ivory/80 text-base md:text-lg leading-loose">
+              本アワードは、日々の行いに光を当て、互いに認め合い、励まし合う場です。良平先生の志が風化することなく、次の世代へと確かに受け継がれていくことを願っています。
+            </p>
           </Reveal>
 
-          {/* 良平アワードの役割を説明する本文 */}
+          {/* 最重要メッセージ(「その志の継承者」に金の下線) */}
           <Reveal className="mt-14 md:mt-20">
-            <div className="space-y-6 text-ivory/80 text-base md:text-lg leading-loose">
-              <p>
-                本アワードは、そうした日々の行いに光を当て、互いに認め合い、励まし合う場です。
-              </p>
-              <p>
-                良平先生の志が風化することなく、ここに集う私たち一人ひとりの中に息づき、次の世代へと確かに受け継がれていくことを願っています。
-              </p>
-            </div>
-          </Reveal>
-
-          {/* 最重要メッセージ */}
-          <Reveal className="mt-20 md:mt-28">
-            <div className="text-center">
-              <div aria-hidden="true" className="mx-auto h-px w-16 bg-gold/60" />
-              <p className="mt-10 font-serif text-ivory text-xl md:text-3xl leading-loose tracking-wider">
-                今日ここにいる全員が、
-                <br className="md:hidden" />
-                その志の継承者です。
-              </p>
-              <div
-                aria-hidden="true"
-                className="mx-auto mt-10 h-px w-16 bg-gold/60"
-              />
-            </div>
+            <p className="font-serif text-ivory text-xl md:text-3xl leading-loose tracking-wider">
+              今日ここにいる全員が、
+              <span className="whitespace-nowrap md:whitespace-normal">
+                <span className="border-b border-gold/70 pb-1">
+                  その志の継承者
+                </span>
+                です。
+              </span>
+            </p>
           </Reveal>
         </div>
       </div>

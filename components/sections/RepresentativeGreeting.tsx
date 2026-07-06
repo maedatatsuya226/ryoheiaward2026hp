@@ -16,8 +16,9 @@ export function RepresentativeGreeting() {
       <div className="mx-auto max-w-3xl px-5 md:px-8 py-20 md:py-28">
         <Reveal>
           <SectionHeading
-            title="良平アワード基金 代表挨拶"
-            variant="editorial"
+            label="Greeting"
+            title="代表挨拶"
+            variant="default"
             align="left"
             onDark
           />
@@ -46,7 +47,7 @@ export function RepresentativeGreeting() {
         </Reveal>
 
         <Reveal className="mt-10 md:mt-12">
-          <div className="rounded-2xl bg-navy-deep/50 px-6 py-8 md:px-10 md:py-10 border-l-2 border-gold">
+          <div className="border-l border-gold/60 pl-6 md:pl-8">
             <div className="space-y-6">
               {g.greeting.map((paragraph) => (
                 <p
