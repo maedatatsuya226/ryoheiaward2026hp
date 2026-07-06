@@ -14,7 +14,7 @@ export function Program() {
     <section id="program" className="bg-ivory scroll-mt-20">
       <div className="mx-auto max-w-3xl px-5 md:px-8 py-20 md:py-32">
         <Reveal>
-          <SectionHeading label="Program" title="当日のプログラム" />
+          <SectionHeading title="当日のプログラム" variant="wide" align="left" />
         </Reveal>
         <Reveal className="mt-12 md:mt-16">
           <ol className="space-y-0 border-l border-gold/50 ml-2">

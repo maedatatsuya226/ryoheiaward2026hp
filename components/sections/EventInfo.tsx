@@ -28,7 +28,7 @@ export function EventInfo() {
     <section id="overview" className="bg-white scroll-mt-20">
       <div className="mx-auto max-w-3xl px-5 md:px-8 py-16 md:py-24">
         <Reveal>
-          <SectionHeading label="Outline" title="良平アワード2026 開催概要" align="left" />
+          <SectionHeading title="良平アワード2026 開催概要" variant="editorial" align="left" />
         </Reveal>
 
         <Reveal className="mt-10 md:mt-14">

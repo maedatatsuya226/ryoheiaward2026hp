@@ -12,8 +12,13 @@ export function History() {
       <div className="py-20 md:py-32">
         <div className="mx-auto max-w-3xl px-5 md:px-8">
           <Reveal>
-            <SectionHeading label="History" title="受け継がれてきた時間" onDark />
-            <p className="mt-8 text-center text-ivory/70 text-sm md:text-base">
+            <SectionHeading
+              title="受け継がれてきた時間"
+              variant="editorial"
+              onDark
+              align="left"
+            />
+            <p className="mt-8 text-ivory/70 text-sm md:text-base max-w-xl">
               良平アワードが積み重ねてきた時間を、写真とともにたどります。
             </p>
           </Reveal>

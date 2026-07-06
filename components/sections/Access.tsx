@@ -12,7 +12,7 @@ export function Access() {
     <section id="access" className="bg-white scroll-mt-20">
       <div className="mx-auto max-w-2xl px-5 md:px-8 py-16 md:py-24">
         <Reveal>
-          <SectionHeading label="Access" title="会場・アクセス" />
+          <SectionHeading title="会場・アクセス" variant="editorial" align="left" />
         </Reveal>
 
         <Reveal className="mt-12 md:mt-16">

@@ -12,7 +12,7 @@ export function AwardeesTeaser() {
     <section id="awardees" className="bg-ivory scroll-mt-20">
       <div className="mx-auto max-w-3xl px-5 md:px-8 py-24 md:py-32 text-center">
         <Reveal>
-          <SectionHeading label="Awardees" title="受賞者紹介" />
+          <SectionHeading title="受賞者紹介" variant="minimal" />
         </Reveal>
 
         {siteStatus.awardeesPublished ? (
