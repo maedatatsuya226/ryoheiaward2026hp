@@ -1,10 +1,15 @@
+import { eventInfo } from "@/data/site";
+import { parseEventDateParts } from "@/lib/eventDate";
 import { Reveal } from "@/components/ui/Reveal";
 
 /**
- * クロージング。
- * 最重要メッセージを、柔らかな光が未来へ続く背景の上で大きく表示する。
+ * クロージング(案4aモック準拠)。
+ * 最重要メッセージを縦書き2列で大きく掲げ、
+ * 下に RYOHEI AWARD 2026 . 11 . 26 の一行で締める。
  */
 export function Closing() {
+  const dateParts = parseEventDateParts(eventInfo.date);
+
   return (
     <section
       aria-label="メッセージ"
@@ -27,34 +32,20 @@ export function Closing() {
         <span className="spark" style={{ left: "84%", width: 3, height: 3, animationDelay: "2s" }} />
       </div>
 
-      <div className="relative mx-auto max-w-4xl px-5 md:px-8 py-28 md:py-44 text-center">
+      <div className="relative mx-auto max-w-4xl px-5 md:px-8 py-24 md:py-36 text-center">
         <Reveal>
-          <p className="text-gold-soft text-xs md:text-sm tracking-[0.35em] uppercase">
-            Message
-          </p>
-        </Reveal>
-        <Reveal delay={150}>
-          {/* モバイル:縦書き2列(右列→左列の順で読む)。「継承者」のみgoldtext */}
-          <p className="md:hidden vertical-heading mx-auto mt-8 font-serif text-ivory text-2xl leading-[1.9]">
-            今日ここにいる全員が、
-            <br />
-            その志の<span className="goldtext">継承者</span>です。
-          </p>
-          {/* PC:横書き */}
-          <p className="hidden md:block mt-8 font-serif text-ivory text-4xl leading-loose tracking-wider">
+          {/* 縦書き2列(右列→左列の順で読む)。「継承者」のみgoldtext */}
+          <p className="vertical-heading inline-block font-serif text-ivory text-2xl md:text-4xl leading-[1.9]">
             今日ここにいる全員が、
             <br />
             その志の<span className="goldtext">継承者</span>です。
           </p>
         </Reveal>
-        <Reveal delay={300}>
-          <p className="mt-8 text-ivory/75 text-sm md:text-base tracking-wide">
-            良平アワード2026 — お会いできる日を、心よりお待ちしています。
+        <Reveal delay={200}>
+          <p className="mt-14 md:mt-20 font-number text-gold-soft/85 text-xs md:text-sm tracking-[0.35em]">
+            RYOHEI AWARD 2026
+            {dateParts && ` . ${dateParts.month} . ${dateParts.day}`}
           </p>
-          <div
-            aria-hidden="true"
-            className="mx-auto mt-10 h-px w-16 bg-gold-soft/70"
-          />
         </Reveal>
       </div>
     </section>
