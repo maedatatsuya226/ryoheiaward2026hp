@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function About() {
   return (
     <section id="about" className="bg-ivory scroll-mt-20">
-      <div className="mx-auto max-w-3xl px-5 md:px-8 py-20 md:py-32">
+      <div className="mx-auto max-w-3xl px-5 md:px-8 py-24 md:py-36">
         <Reveal>
           <SectionHeading label="About" title="良平アワードとは" />
         </Reveal>

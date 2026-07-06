@@ -14,7 +14,7 @@ export function RyoheiProfile() {
 
   return (
     <section id="ryohei" className="bg-white scroll-mt-20">
-      <div className="mx-auto max-w-6xl px-5 md:px-8 py-20 md:py-32">
+      <div className="mx-auto max-w-6xl px-5 md:px-8 py-20 md:py-28">
         <Reveal>
           <SectionHeading label="Dr. Ryohei Kamachi" title="蒲池良平先生について" />
         </Reveal>

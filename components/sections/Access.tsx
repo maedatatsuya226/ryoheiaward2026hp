@@ -10,7 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function Access() {
   return (
     <section id="access" className="bg-white scroll-mt-20">
-      <div className="mx-auto max-w-3xl px-5 md:px-8 py-20 md:py-32">
+      <div className="mx-auto max-w-2xl px-5 md:px-8 py-16 md:py-24">
         <Reveal>
           <SectionHeading label="Access" title="会場・アクセス" />
         </Reveal>

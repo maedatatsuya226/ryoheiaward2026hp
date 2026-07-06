@@ -20,12 +20,12 @@ export function EventInfo() {
 
   return (
     <section id="overview" className="bg-white scroll-mt-20">
-      <div className="mx-auto max-w-3xl px-5 md:px-8 py-20 md:py-32">
+      <div className="mx-auto max-w-2xl px-5 md:px-8 py-16 md:py-24">
         <Reveal>
-          <SectionHeading label="Outline" title="良平アワード2026 開催概要" />
+          <SectionHeading label="Outline" title="良平アワード2026 開催概要" align="left" />
         </Reveal>
 
-        <Reveal className="mt-12 md:mt-16">
+        <Reveal className="mt-10 md:mt-14">
           <dl className="divide-y divide-navy/10 border-y border-navy/10">
             {rows.map((row) => (
               <div
@@ -47,7 +47,7 @@ export function EventInfo() {
               </div>
             ))}
           </dl>
-          <p className="mt-8 text-sm text-muted text-center">
+          <p className="mt-8 text-sm text-muted text-left">
             開催情報は、確定し次第このページでお知らせします。
           </p>
         </Reveal>

@@ -51,12 +51,12 @@ h3 {
 @media (prefers-reduced-motion: no-preference) {
   .reveal[data-revealed="false"] {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(26px);
   }
   .reveal {
     transition:
-      opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
-      transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+      opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 }
 
@@ -71,6 +71,36 @@ h3 {
     }
     to {
       opacity: 0.85;
+    }
+  }
+}
+
+/* --- 背景画像のごく弱いスローズーム(ヒーロー・クロージング用) --- */
+@media (prefers-reduced-motion: no-preference) {
+  .slow-zoom {
+    animation: slowZoom 28s ease-in-out infinite alternate;
+  }
+  @keyframes slowZoom {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* --- ファーストビューのコピーを時間差でフェード表示 --- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: heroEnter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+  @keyframes heroEnter {
+    to {
+      opacity: 1;
+      transform: none;
     }
   }
 }

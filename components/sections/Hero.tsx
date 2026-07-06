@@ -13,9 +13,11 @@ export function Hero() {
       aria-label="良平アワード2026"
       className="relative min-h-svh flex items-center justify-center overflow-hidden bg-navy"
     >
-      {/* 背景プレースホルダー:柔らかな光のグラデーション(写真差し替え前提) */}
-      <div aria-hidden="true" className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep via-navy to-navy-soft" />
+      {/* 背景プレースホルダー:柔らかな光のグラデーション(実写真差し替え前提)
+          将来実写真を使う場合は .slow-zoom が付いた層の中に next/image(fill)を置くと
+          このごく弱いスローズームがそのまま適用される。 */}
+      <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+        <div className="slow-zoom absolute inset-0 bg-gradient-to-b from-navy-deep via-navy to-navy-soft" />
         <div
           className="hero-light absolute inset-0"
           style={{
@@ -34,7 +36,7 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto max-w-4xl px-5 py-28 md:py-32 text-center">
         {/* ロゴ(背景透過PNG。枠や影は付けず、ヒーロー背景にそのまま重ねる) */}
-        <div className="mx-auto mb-8 w-56 md:w-72">
+        <div className="hero-enter mx-auto mb-8 w-56 md:w-72">
           <Image
             src="/logo/ryohei-award-2026.png"
             alt="RYOHEI AWARD 2026 ロゴ"
@@ -44,23 +46,34 @@ export function Hero() {
           />
         </div>
 
-        <p className="text-gold-soft text-sm md:text-base tracking-[0.4em] uppercase">
-          Ryohei Award
-        </p>
-        <h1 className="mt-4 text-ivory text-3xl md:text-5xl tracking-widest">
-          良平アワード2026
-        </h1>
+        <div className="hero-enter" style={{ animationDelay: "160ms" }}>
+          <p className="text-gold-soft text-sm md:text-base tracking-[0.4em] uppercase">
+            Ryohei Award
+          </p>
+          <h1 className="mt-4 text-ivory text-3xl md:text-5xl tracking-widest">
+            良平アワード2026
+          </h1>
+        </div>
 
-        <p className="mt-10 font-serif text-ivory text-xl md:text-3xl leading-loose tracking-wider">
+        <p
+          className="hero-enter mt-10 font-serif text-ivory text-xl md:text-3xl leading-loose tracking-wider"
+          style={{ animationDelay: "380ms" }}
+        >
           志を受け継ぎ、
           <br className="md:hidden" />
           日々の行いに光を。
         </p>
-        <p className="mt-6 text-ivory/80 text-sm md:text-base tracking-wider">
+        <p
+          className="hero-enter mt-6 text-ivory/80 text-sm md:text-base tracking-wider"
+          style={{ animationDelay: "560ms" }}
+        >
           今日ここにいる全員が、その志の継承者です。
         </p>
 
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div
+          className="hero-enter mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+          style={{ animationDelay: "720ms" }}
+        >
           <Link
             href="/#overview"
             className="inline-block rounded-full bg-gold-soft text-navy px-8 py-3.5 text-sm md:text-base tracking-wider hover:bg-gold transition-colors"

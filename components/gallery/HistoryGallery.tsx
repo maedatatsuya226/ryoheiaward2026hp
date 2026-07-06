@@ -123,8 +123,10 @@ export function HistoryGallery() {
             key={`${item.title}-${index}`}
             data-gallery-item
             aria-hidden={index !== current}
-            className={`snap-center shrink-0 w-[76vw] sm:w-[60vw] md:w-[46rem] max-w-full transition-opacity duration-700 ${
-              index === current ? "opacity-100" : "opacity-50"
+            className={`snap-center shrink-0 w-[76vw] sm:w-[60vw] md:w-[46rem] max-w-full transition-[opacity,transform] duration-700 ease-out ${
+              index === current
+                ? `opacity-100 ${reducedMotion ? "" : "scale-[1.03]"}`
+                : `opacity-50 ${reducedMotion ? "" : "scale-[0.96]"}`
             }`}
           >
             {item.image ? (

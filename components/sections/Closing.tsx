@@ -10,9 +10,9 @@ export function Closing() {
       aria-label="メッセージ"
       className="relative bg-navy overflow-hidden"
     >
-      {/* 柔らかな光が未来(上方)へ続く背景 */}
-      <div aria-hidden="true" className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy to-navy-soft" />
+      {/* 柔らかな光が未来(上方)へ続く背景。実写真差し替え時は .slow-zoom 層の中に配置する */}
+      <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+        <div className="slow-zoom absolute inset-0 bg-gradient-to-t from-navy-deep via-navy to-navy-soft" />
         <div
           className="hero-light absolute inset-0"
           style={{
@@ -27,11 +27,15 @@ export function Closing() {
           <p className="text-gold-soft text-xs md:text-sm tracking-[0.4em] uppercase">
             Message
           </p>
+        </Reveal>
+        <Reveal delay={150}>
           <p className="mt-8 font-serif text-ivory text-2xl md:text-4xl leading-loose tracking-wider">
             今日ここにいる全員が、
             <br />
             その志の継承者です。
           </p>
+        </Reveal>
+        <Reveal delay={300}>
           <div
             aria-hidden="true"
             className="mx-auto mt-10 h-px w-16 bg-gold-soft/70"
