@@ -97,22 +97,31 @@ export function About() {
             </blockquote>
           </Reveal>
 
-          {/* 4つの言葉を大きなタイポグラフィとして順番に表示 */}
-          <div className="mt-20 md:mt-28 space-y-10 md:space-y-14 font-serif text-ivory tracking-widest">
-            <Reveal>
-              <p className="text-2xl md:text-4xl">支える人。</p>
-            </Reveal>
-            <Reveal delay={120}>
-              <p className="text-2xl md:text-4xl md:pl-16">気づく人。</p>
-            </Reveal>
-            <Reveal delay={240}>
-              <p className="text-2xl md:text-4xl md:pl-32">手を伸ばす人。</p>
-            </Reveal>
-            <Reveal delay={360}>
-              <p className="text-2xl md:text-4xl md:pl-48">
-                静かに努力を積み重ねる人。
-              </p>
-            </Reveal>
+          {/* 4つの言葉を大きなタイポグラフィとして順番に表示。
+              表示の瞬間、文字の背後に柔らかな光が広がり、金の細いラインが静かに伸びる。
+              PCでは言葉ごとに左右へ配置をずらして視線の流れを作り、スマートフォンでは中央寄せ。 */}
+          <div className="mt-20 md:mt-28 space-y-12 md:space-y-16 font-serif text-ivory tracking-widest">
+            {[
+              { word: "支える人。", offset: "" },
+              { word: "気づく人。", offset: "md:ml-[22%]" },
+              { word: "手を伸ばす人。", offset: "md:ml-[8%]" },
+              { word: "静かに努力を積み重ねる人。", offset: "md:ml-[28%]" },
+            ].map((item, index) => (
+              <Reveal
+                key={item.word}
+                delay={index * 120}
+                className="text-center md:text-left"
+              >
+                <div className={`relative inline-block ${item.offset}`}>
+                  <span aria-hidden="true" className="light-word-glow" />
+                  <p className="relative text-2xl md:text-4xl">{item.word}</p>
+                  <span
+                    aria-hidden="true"
+                    className="light-word-line relative mx-auto md:mx-0 origin-center md:origin-left"
+                  />
+                </div>
+              </Reveal>
+            ))}
           </div>
 
           <Reveal className="mt-14 md:mt-20">
@@ -131,6 +140,15 @@ export function About() {
           {/* 「そのすべてに、光を。」を大きく表示 */}
           <Reveal className="mt-16 md:mt-24">
             <div className="relative text-center py-10 md:py-14">
+              {/* 表示の瞬間、背景全体がごくわずかに明るくなる(セクションのoverflow-hidden内に収まる) */}
+              <div
+                aria-hidden="true"
+                className="light-bloom absolute -inset-x-40 -inset-y-24 md:-inset-x-96 md:-inset-y-32"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(223, 207, 170, 0.09), transparent 72%)",
+                }}
+              />
               <div
                 aria-hidden="true"
                 className="absolute inset-0"

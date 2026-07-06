@@ -60,6 +60,61 @@ h3 {
   }
 }
 
+/* --- 「光を当てる」言葉の演出(Aboutセクションの4つの言葉) --- */
+/* 文字の背後に差す柔らかな光(文字自体は発光させない) */
+.light-word-glow {
+  position: absolute;
+  inset: -60% -35%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(223, 207, 170, 0.13),
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+/* 言葉の下に静かに伸びるシャンパンゴールドの細いライン */
+.light-word-line {
+  display: block;
+  height: 1px;
+  width: 3.5rem;
+  margin-top: 1rem;
+  background: linear-gradient(
+    to right,
+    rgba(199, 168, 107, 0.75),
+    rgba(199, 168, 107, 0)
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 表示の瞬間、光がふわっと広がる */
+  .light-word-glow {
+    transition:
+      opacity 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) 0.25s,
+      transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) 0.25s;
+  }
+  .reveal[data-revealed="false"] .light-word-glow {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+
+  /* ラインは光より少し遅れて静かに伸びる */
+  .light-word-line {
+    transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.45s;
+  }
+  .reveal[data-revealed="false"] .light-word-line {
+    transform: scaleX(0);
+  }
+
+  /* 「そのすべてに、光を。」で周囲がごくわずかに明るくなる */
+  .light-bloom {
+    transition: opacity 1.2s ease 0.3s;
+  }
+  .reveal[data-revealed="false"] .light-bloom {
+    opacity: 0;
+  }
+}
+
 /* --- ファーストビューの光のゆらぎ(ごく弱く・ゆっくり) --- */
 @media (prefers-reduced-motion: no-preference) {
   .hero-light {
