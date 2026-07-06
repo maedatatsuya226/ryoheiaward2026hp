@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -44,11 +45,19 @@ export function Header() {
         <div className="flex items-center justify-between py-4 md:py-5">
           <Link
             href="/"
-            className={`font-serif text-lg md:text-xl tracking-wider transition-colors ${
-              useDarkHeader ? "text-ivory" : "text-ivory"
-            }`}
+            className="flex items-center gap-2.5 md:gap-3 min-w-0 transition-opacity hover:opacity-90"
           >
-            良平アワード<span className="text-gold-soft">2026</span>
+            <Image
+              src="/logo/ryohei-award-2026.png"
+              alt=""
+              width={120}
+              height={80}
+              className="h-8 w-auto md:h-9 shrink-0"
+              priority
+            />
+            <span className="font-serif text-ivory text-base md:text-xl tracking-wider truncate">
+              良平アワード<span className="text-gold-soft">2026</span>
+            </span>
           </Link>
 
           <nav aria-label="メインナビゲーション" className="hidden md:block">
