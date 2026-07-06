@@ -14,6 +14,8 @@
   /* フォント(next/font で読み込んだ変数を参照) */
   --font-serif: var(--font-serif-jp), "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-sans: var(--font-sans-jp), "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  /* 数字専用フォント(日付・章番号・年号) */
+  --font-number: var(--font-cormorant), "Cormorant Garamond", serif;
 }
 
 html {
@@ -158,6 +160,125 @@ h3 {
       transform: none;
     }
   }
+}
+
+/* --- 金のきらめき文字(案4a) --- */
+.goldtext {
+  background: linear-gradient(
+    100deg,
+    #b08d4a 15%,
+    #f0e2ba 38%,
+    #c7a86b 55%,
+    #f7ecca 78%,
+    #b08d4a 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .goldtext {
+    animation: goldtext 7s ease-in-out infinite alternate;
+  }
+  @keyframes goldtext {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 100% 50%;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .goldtext {
+    color: #c7a86b;
+    background: none;
+  }
+}
+
+/* --- 下から立ち上る光の粒(案4a) --- */
+.spark {
+  position: absolute;
+  bottom: 8%;
+  border-radius: 9999px;
+  background: #e9dcb4;
+  box-shadow: 0 0 10px rgba(223, 207, 170, 0.8);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spark {
+    animation: spark 9s ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes spark {
+    0% {
+      transform: translateY(40px) scale(0.5);
+      opacity: 0;
+    }
+    18% {
+      opacity: 0.95;
+    }
+    70% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-420px) scale(1.05);
+      opacity: 0;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spark {
+    display: none;
+  }
+}
+
+/* --- 横に流れるマーキー帯(案4a) --- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee 36s linear infinite;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    transform: none;
+  }
+}
+
+/* --- 縦書き見出しの共通クラス(案4a) --- */
+.vertical-heading {
+  writing-mode: vertical-rl;
+  letter-spacing: 0.24em;
+  /* height未指定時の意図しない列折り返しを防ぐ(引き継ぎ書§5) */
+  height: max-content;
+}
+
+/* --- 輪郭数字(章番号・通し番号用、案4a) --- */
+.outline-number {
+  font-family: var(--font-number);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(199, 168, 107, 0.35);
+}
+
+/* --- 写真の金の内枠(案4a) --- */
+.gold-inner-frame {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(223, 207, 170, 0.35);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 /* --- 写真回廊 --- */
