@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  /* カラーパレット(実装指示書 11章) */
+  --color-navy: #10233f;
+  --color-navy-deep: #0a1830;
+  --color-navy-soft: #1b3358;
+  --color-ivory: #f7f3ea;
+  --color-gold: #c7a86b;
+  --color-gold-soft: #dfcfaa;
+  --color-ink: #1f2933;
+  --color-muted: #667085;
+
+  /* フォント(next/font で読み込んだ変数を参照) */
+  --font-serif: var(--font-serif-jp), "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-sans: var(--font-sans-jp), "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+
+/* 見出しはセリフ体で品格を出す */
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+
+/* フォーカスリングは消さず、サイトのトーンに合わせる */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* --- スクロール連動の表示アニメーション --- */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal[data-revealed="false"] {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  .reveal {
+    transition:
+      opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+}
+
+/* --- ファーストビューの光のゆらぎ(ごく弱く・ゆっくり) --- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-light {
+    animation: heroLight 12s ease-in-out infinite alternate;
+  }
+  @keyframes heroLight {
+    from {
+      opacity: 0.55;
+    }
+    to {
+      opacity: 0.85;
+    }
+  }
+}
+
+/* --- 写真回廊 --- */
+.gallery-track {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold) transparent;
+}
+.gallery-track::-webkit-scrollbar {
+  height: 6px;
+}
+.gallery-track::-webkit-scrollbar-thumb {
+  background-color: var(--color-gold-soft);
+  border-radius: 9999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

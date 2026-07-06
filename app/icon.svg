@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#10233f"/>
+  <path d="M18 46 C14 36 16 24 24 18" fill="none" stroke="#c7a86b" stroke-width="3" stroke-linecap="round"/>
+  <path d="M46 46 C50 36 48 24 40 18" fill="none" stroke="#c7a86b" stroke-width="3" stroke-linecap="round"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f7f3ea" font-weight="bold">R</text>
+</svg>
