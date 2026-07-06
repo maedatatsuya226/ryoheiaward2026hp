@@ -136,17 +136,20 @@ function HistoryGalleryCarousel() {
                 : `opacity-50 ${reducedMotion ? "" : "scale-[0.96]"}`
             }`}
           >
-            {item.image ? (
-              <Image
-                src={item.image}
-                alt={`${item.year ? `${item.year}年 ` : ""}${item.title}`}
-                width={960}
-                height={600}
-                className="w-full rounded-2xl object-cover aspect-[8/5]"
-              />
-            ) : (
-              <PhotoPlaceholder className="w-full rounded-2xl aspect-[8/5]" />
-            )}
+            <div className="relative overflow-hidden rounded-2xl">
+              {item.image ? (
+                <Image
+                  src={item.image}
+                  alt={`${item.year ? `${item.year}年 ` : ""}${item.title}`}
+                  width={960}
+                  height={600}
+                  className="w-full object-cover aspect-[8/5]"
+                />
+              ) : (
+                <PhotoPlaceholder className="w-full aspect-[8/5]" />
+              )}
+              <span aria-hidden="true" className="gold-inner-frame" />
+            </div>
             <figcaption className="mt-4 text-center">
               <span className="block font-serif text-gold-soft text-sm tracking-[0.25em]">
                 {item.year && `${item.year}年 `}

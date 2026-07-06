@@ -37,7 +37,7 @@ export function Footer() {
                     受賞者紹介
                   </Link>
                 ) : (
-                  <span className="text-ivory/50">受賞者は当日発表します</span>
+                  <span className="text-ivory/50">受賞者は近日発表します</span>
                 )}
               </li>
             </ul>
