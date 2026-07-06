@@ -33,15 +33,14 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-5 py-28 md:py-32 text-center">
-        {/* ロゴ */}
-        <div className="mx-auto mb-10 w-48 md:w-64">
+        {/* ロゴ(背景透過PNG。枠や影は付けず、ヒーロー背景にそのまま重ねる) */}
+        <div className="mx-auto mb-8 w-56 md:w-72">
           <Image
             src="/logo/ryohei-award-2026.png"
             alt="RYOHEI AWARD 2026 ロゴ"
             width={480}
             height={320}
             priority
-            className="rounded-xl shadow-[0_8px_40px_rgba(0,0,0,0.35)]"
           />
         </div>
 
