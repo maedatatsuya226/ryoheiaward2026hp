@@ -21,8 +21,6 @@ export type Awardee = {
   awardeeComment?: string;
   /** 写真パス(例:"/images/awardees/xxx.webp") */
   photo?: string | null;
-  /** 紹介動画URL(例:YouTube埋め込みURL) */
-  video?: string | null;
 };
 
 /** 良平アワード2026 受賞者(表彰後に記入) */

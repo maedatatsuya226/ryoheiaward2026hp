@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { awardYears } from "@/data/awardees";
 import { siteStatus } from "@/data/site";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
   title: "受賞者一覧|良平アワード",
@@ -11,53 +10,68 @@ export const metadata: Metadata = {
 };
 
 /**
- * 年度別の受賞者一覧ページ。
+ * 年度別の受賞者一覧ページ(案4a・モック5a)。
+ * 金枠の年度カード+将来年度用の破線プレースホルダー。
  * 年度が増えたら data/awardees.ts の awardYears に追加する。
  */
 export default function AwardeesPage() {
   return (
-    <div className="bg-ivory">
-      {/* ページヘッダー(共通ヘッダーが重なるため上部はネイビー) */}
-      <div className="bg-navy pt-32 pb-16 md:pt-40 md:pb-20 px-5 text-center">
+    <div className="bg-navy-deep min-h-svh">
+      <div className="pt-32 pb-14 md:pt-40 md:pb-16 px-5 text-center">
         <p className="text-gold-soft text-xs tracking-[0.35em] uppercase">
           Awardees
         </p>
         <h1 className="mt-4 font-serif text-ivory text-3xl md:text-4xl tracking-wider">
           受賞者一覧
         </h1>
+        <div aria-hidden="true" className="mx-auto mt-8 h-px w-14 bg-gold/60" />
       </div>
 
-      <div className="mx-auto max-w-3xl px-5 md:px-8 py-16 md:py-24">
-        <SectionHeading title="年度から選ぶ" />
-        <ul className="mt-12 space-y-5">
+      <div className="mx-auto max-w-2xl px-5 md:px-8 pb-20 md:pb-28">
+        <ul className="space-y-6">
           {awardYears.map((entry) => (
             <li key={entry.year}>
               <Link
                 href={entry.href}
-                className="group flex items-center justify-between rounded-2xl bg-white border border-navy/10 px-6 py-6 md:px-10 md:py-8 hover:border-gold transition-colors"
+                className="group relative block overflow-hidden rounded-2xl border border-gold/40 bg-navy px-6 py-8 md:px-10 md:py-10 hover:border-gold transition-colors"
               >
-                <span>
-                  <span className="block font-serif text-gold text-sm tracking-[0.25em]">
-                    {entry.year}
-                  </span>
-                  <span className="mt-1 block font-serif text-navy text-xl md:text-2xl tracking-wider">
-                    {entry.title}
-                  </span>
-                  {!siteStatus.awardeesPublished && entry.year === "2026" && (
-                    <span className="mt-2 block text-sm text-muted">
-                      受賞者は当日発表します
+                <span aria-hidden="true" className="gold-inner-frame" />
+                <span className="flex items-center justify-between gap-6">
+                  <span>
+                    <span className="goldtext font-number block text-5xl md:text-6xl leading-none">
+                      {entry.year}
                     </span>
-                  )}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="text-gold group-hover:translate-x-1 transition-transform"
-                >
-                  →
+                    <span className="mt-3 block font-serif text-ivory text-xl md:text-2xl tracking-wider">
+                      {entry.title}
+                    </span>
+                    {!siteStatus.awardeesPublished && entry.year === "2026" && (
+                      <span className="mt-2 block text-sm text-ivory/60">
+                        受賞者は近日発表します
+                      </span>
+                    )}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="text-gold group-hover:translate-x-1 transition-transform"
+                  >
+                    →
+                  </span>
                 </span>
               </Link>
             </li>
           ))}
+
+          {/* 将来年度のプレースホルダー */}
+          <li aria-hidden="true">
+            <div className="rounded-2xl border border-dashed border-gold/25 px-6 py-8 md:px-10 md:py-10 text-center">
+              <p className="font-number text-ivory/30 text-3xl md:text-4xl leading-none">
+                20XX
+              </p>
+              <p className="mt-3 text-sm text-ivory/40">
+                これからの歩みが、ここに増えていきます。
+              </p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
