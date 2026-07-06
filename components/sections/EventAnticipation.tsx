@@ -1,6 +1,29 @@
 import Link from "next/link";
 import { eventInfo } from "@/data/site";
 
+/** マーキー帯の1セット分(2セット複製してループさせる) */
+function MarqueeContent() {
+  const items = [
+    eventInfo.titleEn,
+    eventInfo.date,
+    eventInfo.venue,
+    "志を受け継ぎ、日々の行いに光を。",
+  ].filter(Boolean) as string[];
+
+  return (
+    <span className="flex shrink-0 items-center">
+      {items.map((item) => (
+        <span key={item} className="flex items-center">
+          <span className="font-number text-gold-soft/90 text-sm md:text-base tracking-[0.2em] whitespace-nowrap">
+            {item}
+          </span>
+          <span className="mx-6 md:mx-10 text-gold/50">·</span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
 /**
  * ヒーロー直下の「当日への期待」帯。
  * 開催日未確定の間も、イベントとしての高揚感を伝える。
@@ -11,6 +34,19 @@ export function EventAnticipation() {
       aria-label="良平アワード2026 開催予告"
       className="relative overflow-hidden bg-navy-deep border-y border-gold/20"
     >
+      {/* 横に流れるマーキー帯(読み上げ用テキストは別途sr-onlyで提供) */}
+      <div className="overflow-hidden border-b border-gold/15 py-3">
+        <p className="sr-only">
+          {eventInfo.titleEn}
+          {eventInfo.date ? ` ${eventInfo.date}` : ""} {eventInfo.venue}{" "}
+          志を受け継ぎ、日々の行いに光を。
+        </p>
+        <div aria-hidden="true" className="marquee-track">
+          <MarqueeContent />
+          <MarqueeContent />
+        </div>
+      </div>
+
       <div
         aria-hidden="true"
         className="anticipation-shimmer absolute inset-0 opacity-60"
@@ -20,7 +56,7 @@ export function EventAnticipation() {
           <div className="flex items-start md:items-center gap-4 md:gap-6">
             <p
               aria-hidden="true"
-              className="shrink-0 font-serif text-gold text-4xl md:text-5xl leading-none tracking-tight"
+              className="shrink-0 font-number text-gold text-5xl md:text-6xl leading-none tracking-tight"
             >
               2026
             </p>
