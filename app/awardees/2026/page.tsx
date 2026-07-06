@@ -24,7 +24,7 @@ export default function Awardees2026Page() {
           Ryohei Award 2026
         </p>
         <h1 className="mt-4 font-serif text-ivory text-3xl md:text-4xl tracking-wider">
-          良平アワード2026 受賞者
+          良平アワード2026 <span className="whitespace-nowrap">受賞者</span>
         </h1>
       </div>
 
