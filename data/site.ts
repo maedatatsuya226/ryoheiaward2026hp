@@ -17,12 +17,12 @@ export const eventInfo = {
   title: "良平アワード2026",
   titleEn: "RYOHEI AWARD 2026",
   venue: "令和健康科学大学",
-  /** 開催日(確定後に "2026-00-00" 形式などで記入) */
-  date: null as string | null,
+  /** 開催日 */
+  date: "2026年11月26日（木）",
   /** 開催時間(例:"13:00〜16:00") */
   time: null as string | null,
   /** 主催者名 */
-  organizer: null as string | null,
+  organizer: "良平アワード基金",
   /** 問い合わせ先 */
   contact: null as string | null,
 };
