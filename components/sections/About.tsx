@@ -1,11 +1,11 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-/** 章マーカー(番号 + 金の細いライン + 章タイトル) */
+/** 章マーカー(輪郭数字 + 金の細いライン + 章タイトル) */
 function ChapterMarker({ number, title }: { number: string; title: string }) {
   return (
     <div className="flex items-center gap-4">
-      <span className="font-serif text-gold text-sm tracking-[0.3em]">
+      <span className="outline-number text-3xl md:text-4xl leading-none">
         {number}
       </span>
       <span aria-hidden="true" className="h-px w-10 md:w-16 bg-gold/50" />
@@ -99,25 +99,41 @@ export function About() {
 
           {/* 4つの言葉を大きなタイポグラフィとして順番に表示。
               表示の瞬間、文字の背後に柔らかな光が広がり、金の細いラインが静かに伸びる。
-              PCでは言葉ごとに左右へ配置をずらして視線の流れを作り、スマートフォンでは中央寄せ。 */}
-          <div className="mt-20 md:mt-28 space-y-12 md:space-y-16 font-serif text-ivory tracking-widest">
+              モバイルは縦書き4本並び(右から読む)、PCは横書きで左右へずらして視線の流れを作る。 */}
+
+          {/* モバイル:縦書き4本並び */}
+          <div className="md:hidden mt-20 flex flex-row-reverse justify-center gap-5 font-serif text-ivory">
+            {[
+              "支える人。",
+              "気づく人。",
+              "手を伸ばす人。",
+              "静かに努力を積み重ねる人。",
+            ].map((word, index) => (
+              <Reveal key={word} delay={index * 150}>
+                <div className="relative">
+                  <span aria-hidden="true" className="light-word-glow" />
+                  {/* vertical-heading は height: max-content のため列折り返しは起きない(引き継ぎ書§5) */}
+                  <p className="vertical-heading relative text-xl">{word}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* PC:横書き・左右ずらし */}
+          <div className="hidden md:block mt-28 space-y-16 font-serif text-ivory tracking-widest">
             {[
               { word: "支える人。", offset: "" },
               { word: "気づく人。", offset: "md:ml-[22%]" },
               { word: "手を伸ばす人。", offset: "md:ml-[8%]" },
               { word: "静かに努力を積み重ねる人。", offset: "md:ml-[28%]" },
             ].map((item, index) => (
-              <Reveal
-                key={item.word}
-                delay={index * 120}
-                className="text-center md:text-left"
-              >
+              <Reveal key={item.word} delay={index * 120} className="text-left">
                 <div className={`relative inline-block ${item.offset}`}>
                   <span aria-hidden="true" className="light-word-glow" />
-                  <p className="relative text-2xl md:text-4xl">{item.word}</p>
+                  <p className="relative text-4xl">{item.word}</p>
                   <span
                     aria-hidden="true"
-                    className="light-word-line relative mx-auto md:mx-0 origin-center md:origin-left"
+                    className="light-word-line relative origin-left"
                   />
                 </div>
               </Reveal>
