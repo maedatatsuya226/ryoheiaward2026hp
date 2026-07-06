@@ -28,7 +28,7 @@ export function RyoheiProfile() {
                 alt={`${p.name}先生の写真`}
                 width={640}
                 height={800}
-                className="w-full rounded-2xl object-cover aspect-[4/5]"
+                className="w-full rounded-2xl object-cover aspect-[4/5] object-top"
               />
             ) : (
               <PhotoPlaceholder

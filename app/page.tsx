@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
 import { EventAnticipation } from "@/components/sections/EventAnticipation";
 import { About } from "@/components/sections/About";
+import { RepresentativeGreeting } from "@/components/sections/RepresentativeGreeting";
 import { RyoheiProfile } from "@/components/sections/RyoheiProfile";
 import { Actions } from "@/components/sections/Actions";
 import { History } from "@/components/sections/History";
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Hero />
       <EventAnticipation />
       <About />
+      <RepresentativeGreeting />
       <RyoheiProfile />
       <Actions />
       <History />

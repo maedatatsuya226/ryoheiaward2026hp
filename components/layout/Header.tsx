@@ -8,6 +8,7 @@ import { siteStatus } from "@/data/site";
 
 const navItems = [
   { href: "/#about", label: "良平アワードとは" },
+  { href: "/#greeting", label: "代表挨拶" },
   { href: "/#ryohei", label: "蒲池良平先生" },
   { href: "/#history", label: "これまでの歩み" },
   { href: "/#overview", label: "開催概要" },

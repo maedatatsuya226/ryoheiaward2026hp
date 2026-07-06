@@ -11,8 +11,8 @@ export const ryoheiProfile = {
   nameReading: "かまち りょうへい",
   affiliation: "新久喜総合病院",
   position: "副院長",
-  /** 写真パス(例:"/images/ryohei/portrait.webp") */
-  photo: null as string | null,
+  /** 写真パス */
+  photo: "/images/ryohei/ryohei-kamachi.png",
   /** 紹介文(段落ごとの配列) */
   introduction: [
     "蒲池良平先生は、新久喜総合病院の副院長として、患者さん一人ひとりに真摯に向き合い、医療の現場を駆け抜けられました。",

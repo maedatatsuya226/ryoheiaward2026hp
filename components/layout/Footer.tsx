@@ -22,6 +22,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/#greeting" className="text-ivory/80 hover:text-gold-soft transition-colors">
+                  代表挨拶
+                </Link>
+              </li>
+              <li>
                 <Link href="/#overview" className="text-ivory/80 hover:text-gold-soft transition-colors">
                   開催概要
                 </Link>
