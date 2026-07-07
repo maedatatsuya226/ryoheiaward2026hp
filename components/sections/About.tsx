@@ -18,10 +18,12 @@ function ChapterMarker({ number, title }: { number: string; title: string }) {
 }
 
 /**
- * 良平アワードとは(創設趣旨)。案4aモック準拠。
- * 冒頭に「そのすべてに、光を。」を掲げ、3章立てで読ませる。
+ * 良平アワードとは(創設趣旨)。
+ * ストーリーの流れ:
  *  01 蒲池良平先生の生涯と医療への姿勢
- *  02 医療を支えるさまざまな人々
+ *  02 医療は一人の大きな成果だけで成り立つものではない(引用)
+ *     → 支える人。/気づく人。/手を伸ばす人。/静かに努力を積み重ねる人。
+ *     → そのすべてに、光を。(このセクションの感情的なピーク)
  *  03 良平アワードが担う役割
  */
 export function About() {
@@ -45,18 +47,8 @@ export function About() {
       <div className="relative mx-auto max-w-3xl px-5 md:px-8 py-20 md:py-28">
         <h2 className="sr-only">良平アワードとは</h2>
 
-        {/* 冒頭の言葉 */}
-        <Reveal className="text-center pt-6 md:pt-10">
-          <p className="goldtext font-serif text-3xl md:text-5xl leading-relaxed tracking-[0.1em]">
-            そのすべてに、
-            <br className="md:hidden" />
-            光を。
-          </p>
-          <div aria-hidden="true" className="mx-auto mt-10 h-px w-14 bg-gold/50" />
-        </Reveal>
-
         {/* ============ 01 蒲池良平先生の生涯と医療への姿勢 ============ */}
-        <div className="mt-20 md:mt-28">
+        <div className="pt-6 md:pt-10">
           <Reveal>
             <ChapterMarker number="01" title="蒲池良平先生の生涯と医療への姿勢" />
           </Reveal>
@@ -92,39 +84,27 @@ export function About() {
             </p>
           </Reveal>
 
-          {/* 4つの言葉:モバイルは縦書き4本並び(右から読む)、PCは横書きで左右へずらす */}
-          <div className="md:hidden mt-14 flex flex-row-reverse items-start justify-center gap-5 font-serif text-ivory">
-            {[
-              "支える人。",
-              "気づく人。",
-              "手を伸ばす人。",
-              "静かに努力を積み重ねる人。",
-            ].map((word, index) => (
-              <Reveal key={word} delay={index * 150}>
-                <div className="relative">
-                  <span aria-hidden="true" className="light-word-glow" />
-                  {/* vertical-heading は height: max-content のため列折り返しは起きない */}
-                  <p className="vertical-heading relative text-xl">{word}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="hidden md:block mt-20 space-y-14 font-serif text-ivory tracking-widest">
+          {/* 4つの言葉(単一マークアップ):
+              モバイルは縦書き4本並び(右から読む)、PCは横書きで左右へずらす。
+              光の背後表示(light-word-glow)は両方で有効。 */}
+          <div className="mt-14 md:mt-20 flex flex-row-reverse items-start justify-center gap-5 md:block md:space-y-14 font-serif text-ivory md:tracking-widest">
             {[
               { word: "支える人。", offset: "" },
               { word: "気づく人。", offset: "md:ml-[22%]" },
               { word: "手を伸ばす人。", offset: "md:ml-[8%]" },
               { word: "静かに努力を積み重ねる人。", offset: "md:ml-[28%]" },
             ].map((item, index) => (
-              <Reveal key={item.word} delay={index * 120} className="text-left">
+              <Reveal key={item.word} delay={index * 130} className="md:text-left">
                 <div className={`relative inline-block ${item.offset}`}>
                   <span aria-hidden="true" className="light-word-glow" />
-                  <p className="relative text-4xl">{item.word}</p>
-                  <span
-                    aria-hidden="true"
-                    className="light-word-line relative origin-left"
-                  />
+                  {/* モバイルは縦書き(height:max-contentのため列折り返しなし)、PCは横書き */}
+                  <p className="max-md:vertical-heading relative text-xl md:text-4xl">
+                    {item.word}
+                  </p>
+                  {/* 金の細いラインはPCのみ(.light-word-line自体がdisplay:blockを持つためラッパーで制御) */}
+                  <span aria-hidden="true" className="hidden md:block">
+                    <span className="light-word-line relative origin-left" />
+                  </span>
                 </div>
               </Reveal>
             ))}
@@ -134,6 +114,26 @@ export function About() {
             <p className="text-ivory/70 text-sm md:text-lg">
               その全てがあって初めて、医療は成り立ちます。
             </p>
+          </Reveal>
+
+          {/* そのすべてに、光を。(このセクションの感情的なピーク) */}
+          <Reveal className="mt-16 md:mt-24">
+            <div className="relative text-center py-10 md:py-14">
+              {/* 表示の瞬間、周囲がごくわずかに明るくなる(light-bloom) */}
+              <div
+                aria-hidden="true"
+                className="light-bloom absolute -inset-x-40 -inset-y-20 md:-inset-x-96"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(223, 207, 170, 0.09), transparent 72%)",
+                }}
+              />
+              <p className="goldtext relative font-serif text-3xl md:text-5xl leading-relaxed tracking-[0.1em]">
+                そのすべてに、
+                <br className="md:hidden" />
+                光を。
+              </p>
+            </div>
           </Reveal>
         </div>
 

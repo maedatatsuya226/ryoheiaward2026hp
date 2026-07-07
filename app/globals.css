@@ -257,8 +257,9 @@ h3 {
   }
 }
 
-/* --- 縦書き見出しの共通クラス(案4a) --- */
-.vertical-heading {
+/* --- 縦書き見出しの共通クラス(案4a) ---
+   @utility にすることで max-md:vertical-heading のようにブレークポイント指定でも使える */
+@utility vertical-heading {
   writing-mode: vertical-rl;
   letter-spacing: 0.24em;
   /* height未指定時の意図しない列折り返しを防ぐ(引き継ぎ書§5) */

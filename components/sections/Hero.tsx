@@ -127,10 +127,10 @@ export function Hero() {
         </p>
 
         {/* 左:情報(PCは写真・CTAも左列) / 右:縦書きメインコピー */}
-        <div className="mt-10 md:mt-12 md:grid md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-16 lg:gap-x-24">
-          <div className="flex items-start justify-between gap-6 md:block">
+        <div className="mt-10 md:mt-12 flex items-start justify-between gap-6 md:grid md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-16 lg:gap-x-24">
+          <div>
             <div
-              className="hero-enter max-w-[52%] md:max-w-none"
+              className="hero-enter max-w-[52vw] md:max-w-none"
               style={{ animationDelay: "160ms" }}
             >
               <p className="text-ivory/85 text-sm md:text-base leading-relaxed">
@@ -162,23 +162,14 @@ export function Hero() {
               </Link>
             </div>
 
-            {/* メインコピー(モバイルは右カラム、PCはグリッド右列) */}
-            <h1
-              className="hero-enter vertical-heading shrink-0 font-serif text-ivory text-[34px] md:hidden leading-[1.75]"
-              style={{ animationDelay: "380ms" }}
-            >
-              志を受け継ぎ、
-              <br />
-              日々の行いに<span className="goldtext">光</span>を。
-            </h1>
-
             {/* PC: 写真カードとCTAを左列に配置して間延びを防ぐ */}
             <FeaturedPhoto className="hero-enter hidden md:block mt-10 max-w-lg" />
             <CtaButtons className="hero-enter hidden md:flex mt-9 gap-3 max-w-lg" />
           </div>
 
+          {/* メインコピー(縦書き・全ブレークポイント共通の単一マークアップ) */}
           <h1
-            className="hero-enter vertical-heading hidden md:block md:self-center font-serif text-ivory md:text-5xl lg:text-[54px] leading-[1.7]"
+            className="hero-enter vertical-heading shrink-0 font-serif text-ivory text-[34px] leading-[1.75] md:self-center md:text-5xl lg:text-[54px] md:leading-[1.7]"
             style={{ animationDelay: "380ms" }}
           >
             志を受け継ぎ、
