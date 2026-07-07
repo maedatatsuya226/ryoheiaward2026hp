@@ -197,6 +197,15 @@ h3 {
   }
 }
 
+/* 縦書き(writing-mode: vertical-rl)内の goldtext は単色ゴールドで表示する。
+   モバイルWebKit(iOS Safari等)では縦書き+background-clip:text の組み合わせで
+   背景が描画されず、透明文字になって文字が消えるバグがあるため。 */
+.vertical-heading .goldtext {
+  background: none;
+  color: var(--color-gold-soft);
+  animation: none;
+}
+
 /* --- 下から立ち上る光の粒(案4a) --- */
 .spark {
   position: absolute;
