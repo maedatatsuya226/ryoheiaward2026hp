@@ -1,12 +1,25 @@
 import Link from "next/link";
-import { siteStatus } from "@/data/site";
+import { awardeesNotice, siteStatus } from "@/data/site";
 import { awardees2026 } from "@/data/awardees";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+/** 「光」の一文字だけgoldtextで強調して表示する */
+function TitleWithGold({ text }: { text: string }) {
+  const index = text.indexOf("光");
+  if (index === -1) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, index)}
+      <span className="goldtext">光</span>
+      {text.slice(index + 1)}
+    </>
+  );
+}
+
 /**
  * 受賞者紹介への導線。
- * 方針: 受賞者は開催前に告知する(発表までは「近日発表」)。
+ * 発表方針の文言は data/site.ts の awardeesNotice で一元管理。
  * 案4a: ダーク基調。
  */
 export function AwardeesTeaser() {
@@ -46,19 +59,17 @@ export function AwardeesTeaser() {
                 className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent"
               />
               <p className="font-serif text-ivory text-xl md:text-2xl leading-loose">
-                まもなく、ここから<span className="goldtext">光</span>ります。
+                <TitleWithGold text={awardeesNotice.teaserTitle} />
               </p>
               <p className="mt-4 text-sm md:text-base text-ivory/70 leading-relaxed">
-                受賞者は開催に先立ちご紹介します。
-                <br className="hidden sm:inline" />
-                発表の日を、どうぞお楽しみに。
+                {awardeesNotice.teaserBody}
               </p>
               <Link
                 href="/awardees/2026"
                 className="mt-6 inline-flex items-center gap-2 text-sm text-gold-soft hover:text-gold transition-colors"
               >
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-soft" />
-                受賞者は近日発表 — 発表後、このページでご紹介します
+                {awardeesNotice.teaserNote}
               </Link>
             </div>
           </Reveal>

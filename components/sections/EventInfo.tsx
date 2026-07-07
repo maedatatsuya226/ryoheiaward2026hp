@@ -1,4 +1,4 @@
-import { eventInfo, siteStatus } from "@/data/site";
+import { awardeesNotice, eventInfo, siteStatus } from "@/data/site";
 import { parseEventDateParts } from "@/lib/eventDate";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -25,7 +25,9 @@ export function EventInfo() {
     },
     {
       label: "受賞者",
-      value: siteStatus.awardeesPublished ? "発表中" : "近日発表",
+      value: siteStatus.awardeesPublished
+        ? "発表中"
+        : awardeesNotice.overviewValue,
       confirmed: true,
     },
   ];

@@ -2,8 +2,41 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { awardees2026 } from "@/data/awardees";
-import { siteStatus } from "@/data/site";
+import { awardeesNotice, siteStatus } from "@/data/site";
 import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
+
+/**
+ * 発表方針の見出しを縦書き2列で表示する。
+ * 最初の読点で改行し、「光」の一文字だけgoldtextで強調する。
+ */
+function VerticalNoticeTitle({ text }: { text: string }) {
+  const breakIndex = text.indexOf("、");
+  const lines =
+    breakIndex === -1
+      ? [text]
+      : [text.slice(0, breakIndex + 1), text.slice(breakIndex + 1)];
+  return (
+    <>
+      {lines.map((line, i) => {
+        const goldIndex = line.indexOf("光");
+        return (
+          <span key={line}>
+            {i > 0 && <br />}
+            {goldIndex === -1 ? (
+              line
+            ) : (
+              <>
+                {line.slice(0, goldIndex)}
+                <span className="goldtext">光</span>
+                {line.slice(goldIndex + 1)}
+              </>
+            )}
+          </span>
+        );
+      })}
+    </>
+  );
+}
 
 export const metadata: Metadata = {
   title: "良平アワード2026 受賞者|良平アワード",
@@ -15,7 +48,7 @@ const PENDING_TEXT = "発表後に掲載します";
 
 /**
  * 良平アワード2026 受賞者ページ(案4a・モック5b/5c)。
- * 発表前(awardeesPublished: false): 縦書き「まもなく、ここから光ります。」+光の粒。
+ * 発表前(awardeesPublished: false): 縦書きの発表予告(awardeesNotice.teaserTitle)+光の粒。
  * 発表後: 受賞者カード(輪郭数字+写真枠+部門+氏名+所属+各コメント)。
  * 動画は掲載しない(方針確定)。架空の受賞者を作らないこと。
  */
@@ -52,15 +85,11 @@ export default function Awardees2026Page() {
             </div>
 
             {/* 縦書き2列(右列→左列の順で読む)。「光」のみgoldtext */}
-            <p className="vertical-heading relative mx-auto font-serif text-ivory text-2xl md:text-3xl leading-[2]">
-              まもなく、
-              <br />
-              ここから<span className="goldtext">光</span>ります。
+            <p className="vertical-heading relative inline-block font-serif text-ivory text-2xl md:text-3xl leading-[2]">
+              <VerticalNoticeTitle text={awardeesNotice.teaserTitle} />
             </p>
             <p className="relative mt-10 text-ivory/70 text-sm md:text-base leading-relaxed">
-              受賞者は開催に先立ちご紹介します。
-              <br className="hidden sm:inline" />
-              発表の日を、どうぞお楽しみに。
+              {awardeesNotice.pageLead}
             </p>
             <Link
               href="/"

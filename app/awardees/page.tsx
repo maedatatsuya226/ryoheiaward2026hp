@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { awardYears } from "@/data/awardees";
-import { siteStatus } from "@/data/site";
+import { awardeesNotice, siteStatus } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "受賞者一覧|良平アワード",
@@ -46,7 +46,7 @@ export default function AwardeesPage() {
                     </span>
                     {!siteStatus.awardeesPublished && entry.year === "2026" && (
                       <span className="mt-2 block text-sm text-ivory/60">
-                        受賞者は近日発表します
+                        {awardeesNotice.yearCard}
                       </span>
                     )}
                   </span>

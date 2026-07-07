@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { eventInfo, siteStatus } from "@/data/site";
+import { awardeesNotice, eventInfo, siteStatus } from "@/data/site";
 import { historyItems } from "@/data/history";
 import { parseEventDateParts } from "@/lib/eventDate";
 
@@ -70,7 +70,7 @@ function CtaButtons({ className = "" }: { className?: string }) {
             aria-hidden="true"
             className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-soft"
           />
-          受賞者は近日発表
+          {awardeesNotice.short}
         </Link>
       )}
     </div>
