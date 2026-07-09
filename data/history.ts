@@ -29,4 +29,22 @@ export const historyItems: HistoryItem[] = [
     caption: "ともに志を受け継ぐ仲間たち",
     image: "/images/history/history-2024-02.jpg",
   },
+  {
+    year: "2025",
+    title: "第2回 良平アワード",
+    caption: "式典での挨拶",
+    image: "/images/history/history-2025-01.jpg",
+  },
+  {
+    year: "2025",
+    title: "第2回 受賞のひととき",
+    caption: "仲間たちとともに",
+    image: "/images/history/history-2025-02.jpg",
+  },
+  {
+    year: "2025",
+    title: "第2回 記念写真",
+    caption: "志を受け継ぐ仲間たち",
+    image: "/images/history/history-2025-03.jpg",
+  },
 ];
