@@ -59,9 +59,6 @@ export function RepresentativeGreeting() {
               ))}
             </div>
           </div>
-          <p className="mt-6 text-sm text-ivory/50">
-            ※ 本文は仮の文案です。確定後に差し替えます。
-          </p>
         </Reveal>
       </div>
     </section>
