@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 /**
  * クロージング(案4aモック準拠)。
  * 最重要メッセージを縦書き2列で大きく掲げ、
- * 下に RYOHEI AWARD 2026 . 11 . 26 の一行で締める。
+ * 下に RYOHEI AWARD 2026 . {月} . {日} の一行で締める(日付はeventInfo.dateから導出)。
  */
 export function Closing() {
   const dateParts = parseEventDateParts(eventInfo.date);

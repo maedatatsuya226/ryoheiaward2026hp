@@ -44,7 +44,7 @@ export const eventInfo = {
   titleEn: "RYOHEI AWARD 2026",
   venue: "令和健康科学大学",
   /** 開催日 */
-  date: "2026年11月26日（木）",
+  date: "2026年11月25日（水）",
   /** 開催時間(例:"13:00〜16:00") */
   time: null as string | null,
   /** 主催者名 */
