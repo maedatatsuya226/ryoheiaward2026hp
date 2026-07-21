@@ -14,7 +14,7 @@ export const actionItems: ActionItem[] = [
   {
     title: "患者さんに寄り添う",
     text: "不安な気持ちに気づき、そばに立ち続けること。治療だけでは届かない安心を、日々のかかわりが支えています。",
-    image: "/images/actions/action-01-patient.jpg",
+    image: "/images/actions/action-01-patient-2.jpg",
     objectPosition: "center center",
   },
   {
