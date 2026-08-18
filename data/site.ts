@@ -38,6 +38,21 @@ export const awardeesNotice = {
   overviewValue: "近日発表",
 };
 
+/**
+ * 選考の進行状況
+ *
+ * 審査が進んだら currentStage を更新してください。
+ * "first"=一次審査中 / "second"=二次審査中 / "final"=最終審査中 / "award"=授賞式
+ */
+export const selectionStatus = {
+  /** 候補者数 */
+  candidates: 66,
+  /** 一次審査通過者数 */
+  firstPassed: 31,
+  /** 現在の段階 */
+  currentStage: "second" as "first" | "second" | "final" | "award",
+};
+
 /** 開催概要 */
 export const eventInfo = {
   title: "良平アワード2026",

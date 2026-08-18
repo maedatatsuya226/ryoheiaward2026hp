@@ -3,6 +3,7 @@ import { awardeesNotice, siteStatus } from "@/data/site";
 import { awardees2026 } from "@/data/awardees";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SelectionJourney } from "@/components/sections/SelectionJourney";
 
 /** 「光」の一文字だけgoldtextで強調して表示する */
 function TitleWithGold({ text }: { text: string }) {
@@ -24,10 +25,34 @@ function TitleWithGold({ text }: { text: string }) {
  */
 export function AwardeesTeaser() {
   return (
-    <section id="awardees" className="bg-navy-deep scroll-mt-20 border-y border-gold/10">
-      <div className="mx-auto max-w-3xl px-5 md:px-8 py-24 md:py-32 text-center">
+    <section
+      id="awardees"
+      className="relative bg-navy-deep scroll-mt-20 border-y border-gold/10 overflow-hidden"
+    >
+      {/* 背景:光の粒 */}
+      <div aria-hidden="true" className="absolute inset-0">
+        <span className="spark" style={{ left: "14%", width: 3, height: 3, animationDelay: "1s" }} />
+        <span className="spark" style={{ left: "48%", width: 4, height: 4, animationDelay: "3.8s" }} />
+        <span className="spark" style={{ left: "82%", width: 3, height: 3, animationDelay: "6.2s" }} />
+      </div>
+
+      <div className="relative mx-auto max-w-3xl px-5 md:px-8 py-24 md:py-32 text-center">
         <Reveal>
           <SectionHeading title="受賞者紹介" variant="minimal" onDark />
+        </Reveal>
+
+        {/* 選考の進行状況(★比較用に案1・案2を仮で両方表示中。確定後どちらかを削除) */}
+        <Reveal className="mt-14">
+          <p className="mb-6 text-xs text-ivory/40 tracking-widest">
+            ── 案1:光の選考ジャーニー ──
+          </p>
+          <SelectionJourney variant="journey" />
+        </Reveal>
+        <Reveal className="mt-20">
+          <p className="mb-6 text-xs text-ivory/40 tracking-widest">
+            ── 案2:数字のドラマ型 ──
+          </p>
+          <SelectionJourney variant="numbers" />
         </Reveal>
 
         {siteStatus.awardeesPublished ? (
