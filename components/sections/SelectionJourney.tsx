@@ -116,14 +116,17 @@ export function SelectionJourney() {
         </h3>
 
         <div className="relative mx-auto mt-10 max-w-xs">
-          {/* 下にいくほど細くなる光の帯(ファネル) */}
+          {/* 下にいくほど細くなる光(輪郭のない柔らかなグラデーションを大→中→小と重ねる) */}
           <div
             aria-hidden="true"
-            className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-56 md:w-64"
+            className="absolute -top-16 -bottom-12 left-1/2 -translate-x-1/2 w-72 md:w-80"
             style={{
-              background:
-                "linear-gradient(to bottom, rgba(223, 207, 170, 0.11), rgba(223, 207, 170, 0.02))",
-              clipPath: "polygon(0% 0%, 100% 0%, 58% 100%, 42% 100%)",
+              background: [
+                "radial-gradient(ellipse 60% 22% at 50% 16%, rgba(223, 207, 170, 0.12), transparent 66%)",
+                "radial-gradient(ellipse 42% 20% at 50% 46%, rgba(223, 207, 170, 0.1), transparent 66%)",
+                "radial-gradient(ellipse 25% 18% at 50% 74%, rgba(223, 207, 170, 0.08), transparent 66%)",
+                "radial-gradient(ellipse 13% 9% at 50% 90%, rgba(223, 207, 170, 0.1), transparent 68%)",
+              ].join(", "),
             }}
           />
 
