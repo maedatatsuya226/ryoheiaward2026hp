@@ -1,4 +1,4 @@
-import { eventInfo, selectionStatus } from "@/data/site";
+﻿import { eventInfo, selectionStatus } from "@/data/site";
 import { parseEventDateParts } from "@/lib/eventDate";
 import { CountUp } from "@/components/ui/CountUp";
 
@@ -135,7 +135,7 @@ export function SelectionJourney({
           <div className="relative flex flex-col items-center">
             {/* 候補者 */}
             <p className="font-number text-ivory/55 text-5xl md:text-6xl leading-none">
-              <CountUp to={s.candidates} duration={1300} />
+              <CountUp to={s.candidates} duration={1100} delay={200} />
             </p>
             <p className="mt-2 text-ivory/60 text-xs tracking-[0.2em]">候補者</p>
 
@@ -148,7 +148,7 @@ export function SelectionJourney({
 
             {/* 一次審査通過 */}
             <p className="goldtext font-number mt-3 text-7xl md:text-8xl leading-none">
-              <CountUp to={s.firstPassed} duration={2000} />
+              <CountUp to={s.firstPassed} duration={2400} delay={1500} />
             </p>
             <p className="mt-2 text-gold-soft text-xs tracking-[0.2em]">
               一次審査通過
@@ -208,7 +208,7 @@ export function SelectionJourney({
       <div className="mt-10 flex items-end justify-center gap-5 md:gap-8">
         <div className="text-center">
           <p className="font-number text-ivory/55 text-5xl md:text-6xl leading-none">
-            <CountUp to={s.candidates} duration={1300} />
+            <CountUp to={s.candidates} duration={1100} delay={200} />
           </p>
           <p className="mt-2.5 text-ivory/60 text-xs tracking-[0.2em]">候補者</p>
         </div>
@@ -217,7 +217,7 @@ export function SelectionJourney({
         </span>
         <div className="text-center">
           <p className="goldtext font-number text-7xl md:text-8xl leading-none">
-            <CountUp to={s.firstPassed} duration={2000} />
+            <CountUp to={s.firstPassed} duration={2400} delay={1500} />
           </p>
           <p className="mt-2.5 text-gold-soft text-xs tracking-[0.2em]">
             一次審査通過
