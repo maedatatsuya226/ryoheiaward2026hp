@@ -45,18 +45,9 @@ export function AwardeesTeaser() {
           <SectionHeading title="受賞者紹介" variant="minimal" onDark />
         </Reveal>
 
-        {/* 選考の進行状況(★比較用に縦型・横型を仮で両方表示中。確定後どちらかを削除) */}
+        {/* 選考の進行状況 */}
         <Reveal className="mt-14">
-          <p className="mb-6 text-xs text-ivory/40 tracking-widest">
-            ── 新案:縦型(絞り込みファネル) ──
-          </p>
-          <SelectionJourney variant="vertical" />
-        </Reveal>
-        <Reveal className="mt-20">
-          <p className="mb-6 text-xs text-ivory/40 tracking-widest">
-            ── 現行案:横型 ──
-          </p>
-          <SelectionJourney variant="horizontal" />
+          <SelectionJourney />
         </Reveal>
 
         {siteStatus.awardeesPublished ? (

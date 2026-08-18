@@ -1,4 +1,4 @@
-﻿import { eventInfo, selectionStatus } from "@/data/site";
+import { eventInfo, selectionStatus } from "@/data/site";
 import { parseEventDateParts } from "@/lib/eventDate";
 import { CountUp } from "@/components/ui/CountUp";
 
@@ -93,25 +93,20 @@ function Connector({ reached }: { reached: boolean }) {
 
 /**
  * 選考の進行状況(データは data/site.ts の selectionStatus)。
- * variant "vertical": 上から下へ数字が絞られていくファネル型(新案)
- * variant "horizontal": 66→31+横ステッパー(現行案)
+ * 上から下へ数字が絞られていくファネル型。
+ * 審査が進んだら data/site.ts の currentStage を更新するだけで現在地が進む。
  */
-export function SelectionJourney({
-  variant = "vertical",
-}: {
-  variant?: "vertical" | "horizontal";
-}) {
+export function SelectionJourney() {
   const s = selectionStatus;
   const currentIndex = stageIndex(s.currentStage);
   const dateParts = parseEventDateParts(eventInfo.date);
 
-  if (variant === "vertical") {
-    const state = (key: StageKey): "done" | "current" | "future" => {
-      const i = stageIndex(key);
-      return i < currentIndex ? "done" : i === currentIndex ? "current" : "future";
-    };
+  const state = (key: StageKey): "done" | "current" | "future" => {
+    const i = stageIndex(key);
+    return i < currentIndex ? "done" : i === currentIndex ? "current" : "future";
+  };
 
-    return (
+  return (
       <div className="text-center">
         <p className="text-gold-soft text-xs tracking-[0.35em] uppercase">
           Selection
@@ -191,94 +186,5 @@ export function SelectionJourney({
 
         <Note currentKey={s.currentStage} />
       </div>
-    );
-  }
-
-  /* ============ 横型(現行案) ============ */
-  return (
-    <div className="text-center">
-      <p className="text-gold-soft text-xs tracking-[0.35em] uppercase">
-        Selection
-      </p>
-      <h3 className="mt-3 font-serif text-ivory text-xl md:text-2xl tracking-wider">
-        選考のあゆみ
-      </h3>
-
-      {/* 66 → 31 のカウント */}
-      <div className="mt-10 flex items-end justify-center gap-5 md:gap-8">
-        <div className="text-center">
-          <p className="font-number text-ivory/55 text-5xl md:text-6xl leading-none">
-            <CountUp to={s.candidates} duration={1100} delay={200} />
-          </p>
-          <p className="mt-2.5 text-ivory/60 text-xs tracking-[0.2em]">候補者</p>
-        </div>
-        <span aria-hidden="true" className="pb-7 text-gold/70 text-xl md:text-2xl">
-          →
-        </span>
-        <div className="text-center">
-          <p className="goldtext font-number text-7xl md:text-8xl leading-none">
-            <CountUp to={s.firstPassed} duration={2400} delay={1500} />
-          </p>
-          <p className="mt-2.5 text-gold-soft text-xs tracking-[0.2em]">
-            一次審査通過
-          </p>
-        </div>
-      </div>
-
-      {/* 選考段階ステッパー(現在地が明滅) */}
-      <ol className="mt-12 flex items-start justify-center list-none">
-        {STAGES.map((stage, index) => {
-          const done = index < currentIndex;
-          const current = index === currentIndex;
-          return (
-            <li key={stage.key} className="flex items-start">
-              {index > 0 && (
-                <span
-                  aria-hidden="true"
-                  className={`mt-[5px] h-px w-6 sm:w-10 md:w-16 ${
-                    index <= currentIndex ? "bg-gold/60" : "bg-ivory/15"
-                  }`}
-                />
-              )}
-              <div className="relative -mt-0.5 flex w-16 md:w-20 flex-col items-center">
-                <span className="relative flex h-3 w-3 items-center justify-center">
-                  {current && (
-                    <span
-                      aria-hidden="true"
-                      className="animate-pulse-soft absolute -inset-1.5 rounded-full bg-gold/40 blur-[5px]"
-                    />
-                  )}
-                  <span
-                    className={`relative h-3 w-3 rounded-full ${
-                      done || current ? "bg-gold" : "border border-ivory/30"
-                    }`}
-                  />
-                </span>
-                <span
-                  className={`mt-2.5 text-xs tracking-[0.15em] ${
-                    current
-                      ? "text-gold-soft"
-                      : done
-                        ? "text-ivory/70"
-                        : "text-ivory/40"
-                  }`}
-                >
-                  {stage.label}
-                  {current && <span className="sr-only">(現在の段階)</span>}
-                </span>
-                {stage.key === "award" && dateParts && (
-                  <span className="mt-1 font-number text-ivory/40 text-[11px] tracking-[0.2em]">
-                    {dateParts.month}.{dateParts.day}
-                  </span>
-                )}
-                {done && <span className="mt-1 text-gold/60 text-[11px]">済</span>}
-              </div>
-            </li>
-          );
-        })}
-      </ol>
-
-      <Note currentKey={s.currentStage} />
-    </div>
   );
 }
