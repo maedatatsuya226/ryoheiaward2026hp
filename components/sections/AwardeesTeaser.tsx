@@ -29,11 +29,15 @@ export function AwardeesTeaser() {
       id="awardees"
       className="relative bg-navy-deep scroll-mt-20 border-y border-gold/10 overflow-hidden"
     >
-      {/* 背景:光の粒 */}
+      {/* 背景:光の粒(セクションが縦に長いため、高さ方向にも分散して配置) */}
       <div aria-hidden="true" className="absolute inset-0">
         <span className="spark" style={{ left: "14%", width: 3, height: 3, animationDelay: "1s" }} />
         <span className="spark" style={{ left: "48%", width: 4, height: 4, animationDelay: "3.8s" }} />
         <span className="spark" style={{ left: "82%", width: 3, height: 3, animationDelay: "6.2s" }} />
+        <span className="spark" style={{ left: "26%", bottom: "42%", width: 3, height: 3, animationDelay: "2.6s" }} />
+        <span className="spark" style={{ left: "68%", bottom: "48%", width: 4, height: 4, animationDelay: "5s" }} />
+        <span className="spark" style={{ left: "38%", bottom: "72%", width: 3, height: 3, animationDelay: "0.4s" }} />
+        <span className="spark" style={{ left: "88%", bottom: "78%", width: 3, height: 3, animationDelay: "7.4s" }} />
       </div>
 
       <div className="relative mx-auto max-w-3xl px-5 md:px-8 py-24 md:py-32 text-center">
@@ -41,18 +45,9 @@ export function AwardeesTeaser() {
           <SectionHeading title="受賞者紹介" variant="minimal" onDark />
         </Reveal>
 
-        {/* 選考の進行状況(★比較用に案1・案2を仮で両方表示中。確定後どちらかを削除) */}
+        {/* 選考の進行状況 */}
         <Reveal className="mt-14">
-          <p className="mb-6 text-xs text-ivory/40 tracking-widest">
-            ── 案1:光の選考ジャーニー ──
-          </p>
-          <SelectionJourney variant="journey" />
-        </Reveal>
-        <Reveal className="mt-20">
-          <p className="mb-6 text-xs text-ivory/40 tracking-widest">
-            ── 案2:数字のドラマ型 ──
-          </p>
-          <SelectionJourney variant="numbers" />
+          <SelectionJourney />
         </Reveal>
 
         {siteStatus.awardeesPublished ? (

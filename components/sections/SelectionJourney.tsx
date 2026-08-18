@@ -25,41 +25,12 @@ function stageNote(currentKey: string): string {
 
 /**
  * 選考の進行状況(データは data/site.ts の selectionStatus)。
- * variant "journey": 数字+選考段階ステッパー(現在地が金色に明滅)
- * variant "numbers": 大きなカウント数字を主役にしたシンプル表示
+ * 66→31のカウントアップ+選考段階ステッパー(現在地が金色に明滅)。
  */
-export function SelectionJourney({
-  variant = "journey",
-}: {
-  variant?: "journey" | "numbers";
-}) {
+export function SelectionJourney() {
   const s = selectionStatus;
   const currentIndex = STAGES.findIndex((st) => st.key === s.currentStage);
   const dateParts = parseEventDateParts(eventInfo.date);
-
-  if (variant === "numbers") {
-    return (
-      <div className="text-center">
-        <p className="text-ivory/75 text-sm md:text-base leading-relaxed">
-          <span className="font-number text-ivory/70 text-2xl md:text-3xl mx-1 align-[-0.1em]">
-            {s.candidates}
-          </span>
-          名の候補者から、一次審査を通過したのは
-        </p>
-        <p className="mt-4 leading-none">
-          <span className="goldtext font-number text-[88px] md:text-[120px]">
-            <CountUp to={s.firstPassed} />
-          </span>
-          <span className="ml-2 text-ivory/80 text-xl md:text-2xl">名</span>
-        </p>
-        <p className="mt-6 text-ivory/70 text-sm md:text-base">
-          {stageNote(s.currentStage)}
-          <br className="sm:hidden" />
-          光は、すこしずつ絞られていきます。
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="text-center">
@@ -148,8 +119,14 @@ export function SelectionJourney({
         })}
       </ol>
 
-      <p className="mt-8 text-ivory/70 text-sm md:text-base">
+      <p className="mt-8 text-ivory/70 text-sm md:text-base leading-relaxed">
         {stageNote(s.currentStage)}
+        {s.currentStage !== "award" && (
+          <>
+            <br className="sm:hidden" />
+            光は、すこしずつ絞られていきます。
+          </>
+        )}
       </p>
     </div>
   );
