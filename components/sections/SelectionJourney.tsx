@@ -62,7 +62,7 @@ function StageChip({
           />
           <span className="relative h-2 w-2 rounded-full bg-gold" />
         </span>
-        {label} — いまここ
+        {label.endsWith("審査") ? `${label}中` : label}
       </span>
     );
   }
