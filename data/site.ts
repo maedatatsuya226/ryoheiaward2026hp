@@ -49,8 +49,10 @@ export const selectionStatus = {
   candidates: 66,
   /** 一次審査通過者数 */
   firstPassed: 31,
+  /** 二次審査通過者数(未確定の間は null) */
+  secondPassed: 19 as number | null,
   /** 現在の段階 */
-  currentStage: "second" as "first" | "second" | "final" | "award",
+  currentStage: "final" as "first" | "second" | "final" | "award",
 };
 
 /** 開催概要 */

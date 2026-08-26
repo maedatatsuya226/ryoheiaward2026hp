@@ -145,8 +145,8 @@ export function SelectionJourney() {
             </div>
 
             {/* 一次審査通過 */}
-            <p className="goldtext font-number mt-3 text-7xl md:text-8xl leading-none">
-              <CountUp to={s.firstPassed} duration={2400} delay={1500} />
+            <p className="goldtext font-number mt-3 text-6xl md:text-7xl leading-none">
+              <CountUp to={s.firstPassed} duration={1400} delay={1400} />
             </p>
             <p className="mt-2 text-gold-soft text-xs tracking-[0.2em]">
               一次審査通過
@@ -158,6 +158,21 @@ export function SelectionJourney() {
               <StageChip label="二次審査" state={state("second")} />
               <Connector reached={currentIndex > stageIndex("second")} />
             </div>
+
+            {/* 二次審査通過(絞られるほど数字は大きく・金色に) */}
+            {typeof s.secondPassed === "number" && (
+              <>
+                <p className="goldtext font-number mt-3 text-7xl md:text-8xl leading-none">
+                  <CountUp to={s.secondPassed} duration={2400} delay={3000} />
+                </p>
+                <p className="mt-2 text-gold-soft text-xs tracking-[0.2em]">
+                  二次審査通過
+                </p>
+                <div className="mt-3 flex flex-col items-center">
+                  <Connector reached={currentIndex >= stageIndex("final")} />
+                </div>
+              </>
+            )}
 
             {/* 最終審査 */}
             <div className="flex flex-col items-center">
