@@ -133,7 +133,7 @@ export function SelectionJourney() {
           <div className="relative flex flex-col items-center">
             {/* 候補者 */}
             <p className="font-number text-ivory/55 text-5xl md:text-6xl leading-none">
-              <CountUp to={s.candidates} duration={1100} delay={200} />
+              <CountUp to={s.candidates} duration={900} delay={150} />
             </p>
             <p className="mt-2 text-ivory/60 text-xs tracking-[0.2em]">候補者</p>
 
@@ -146,7 +146,7 @@ export function SelectionJourney() {
 
             {/* 一次審査通過 */}
             <p className="goldtext font-number mt-3 text-6xl md:text-7xl leading-none">
-              <CountUp to={s.firstPassed} duration={1400} delay={1400} />
+              <CountUp to={s.firstPassed} duration={1000} delay={1100} />
             </p>
             <p className="mt-2 text-gold-soft text-xs tracking-[0.2em]">
               一次審査通過
@@ -163,7 +163,7 @@ export function SelectionJourney() {
             {typeof s.secondPassed === "number" && (
               <>
                 <p className="goldtext font-number mt-3 text-7xl md:text-8xl leading-none">
-                  <CountUp to={s.secondPassed} duration={2400} delay={3000} />
+                  <CountUp to={s.secondPassed} duration={1100} delay={2200} />
                 </p>
                 <p className="mt-2 text-gold-soft text-xs tracking-[0.2em]">
                   二次審査通過
@@ -179,6 +179,21 @@ export function SelectionJourney() {
               <StageChip label="最終審査" state={state("final")} />
               <Connector reached={currentIndex > stageIndex("final")} />
             </div>
+
+            {/* 受賞(最終審査で決定した13の取り組み・光の最終到達点のひとつ手前) */}
+            {typeof s.finalPassed === "number" && (
+              <>
+                <p className="goldtext font-number mt-3 text-8xl md:text-9xl leading-none">
+                  <CountUp to={s.finalPassed} duration={2000} delay={3400} />
+                </p>
+                <p className="mt-2 text-gold-soft text-xs tracking-[0.2em]">
+                  受賞
+                </p>
+                <div className="mt-3 flex flex-col items-center">
+                  <Connector reached={currentIndex >= stageIndex("award")} />
+                </div>
+              </>
+            )}
 
             {/* 授賞式(光の収束点) */}
             <div className="mt-1 flex flex-col items-center">
@@ -196,7 +211,7 @@ export function SelectionJourney() {
                 </p>
               )}
               <p className="mt-1 text-ivory/70 text-xs tracking-[0.2em]">
-                授賞式 — 受賞者発表
+                授賞式 — 表彰の日
               </p>
             </div>
           </div>
