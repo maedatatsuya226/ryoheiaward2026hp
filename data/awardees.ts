@@ -110,7 +110,7 @@ export const awardees2026: Awardee[] = [
     name: "排尿自立支援チーム",
     affiliation: "小金井リハビリテーション病院",
     category: "多職種部門",
-    title: "排尿実支援の最前線～チームが変える、患者の未来～",
+    title: "排尿自立支援の最前線～チームが変える、患者の未来～",
   },
 ];
 
