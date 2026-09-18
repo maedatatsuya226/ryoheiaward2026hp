@@ -8,8 +8,8 @@
 
 /** 公開状態の切り替え */
 export const siteStatus = {
-  /** 受賞者情報を公開するか(表彰後に true へ) */
-  awardeesPublished: false,
+  /** 受賞者情報を公開するか(2026-09 事前発表により true) */
+  awardeesPublished: true,
 };
 
 /**
@@ -51,8 +51,10 @@ export const selectionStatus = {
   firstPassed: 31,
   /** 二次審査通過者数(未確定の間は null) */
   secondPassed: 19 as number | null,
+  /** 受賞件数(最終審査で決定。未確定の間は null) */
+  finalPassed: 13 as number | null,
   /** 現在の段階 */
-  currentStage: "final" as "first" | "second" | "final" | "award",
+  currentStage: "award" as "first" | "second" | "final" | "award",
 };
 
 /** 開催概要 */

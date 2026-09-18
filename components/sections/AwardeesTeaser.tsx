@@ -52,21 +52,17 @@ export function AwardeesTeaser() {
 
         {siteStatus.awardeesPublished ? (
           <Reveal className="mt-12">
-            {awardees2026.length > 0 && (
-              <ul className="mb-10 space-y-2">
-                {awardees2026.slice(0, 3).map((awardee) => (
-                  <li key={awardee.name} className="font-serif text-ivory text-lg">
-                    {awardee.name}
-                    <span className="ml-3 text-sm text-ivory/60 font-sans">
-                      {awardee.affiliation}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <p className="font-serif text-ivory text-xl md:text-2xl leading-loose">
+              受賞者が<span className="goldtext">決定</span>しました。
+            </p>
+            <p className="mt-4 text-sm md:text-base text-ivory/70 leading-relaxed">
+              医療の現場で積み重ねられてきた、
+              <br className="sm:hidden" />
+              {awardees2026.length}の取り組みに光が当たりました。
+            </p>
             <Link
               href="/awardees/2026"
-              className="btn-primary inline-block rounded-lg bg-gold-soft text-navy px-10 py-4 tracking-wider hover:bg-gold transition-colors"
+              className="btn-primary mt-8 inline-block rounded-full bg-gradient-to-r from-gold to-gold-soft text-navy px-10 py-4 tracking-wider hover:opacity-90 transition-opacity"
             >
               良平アワード2026 受賞者を見る
             </Link>

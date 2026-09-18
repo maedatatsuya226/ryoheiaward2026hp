@@ -2,11 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { awardees2026 } from "@/data/awardees";
-import { awardeesNotice, siteStatus } from "@/data/site";
-import { PhotoPlaceholder } from "@/components/ui/PhotoPlaceholder";
+import { awardeesNotice, eventInfo, siteStatus } from "@/data/site";
+
+export const metadata: Metadata = {
+  title: "良平アワード2026 受賞者|良平アワード",
+  description:
+    "良平アワード2026の受賞者をご紹介します。医療現場で日々積み重ねられる誠実な行いに光を当てます。",
+};
 
 /**
- * 発表方針の見出しを縦書き2列で表示する。
+ * 発表方針の見出しを縦書き2列で表示する(発表前のみ使用)。
  * 最初の読点で改行し、「光」の一文字だけgoldtextで強調する。
  */
 function VerticalNoticeTitle({ text }: { text: string }) {
@@ -38,22 +43,17 @@ function VerticalNoticeTitle({ text }: { text: string }) {
   );
 }
 
-export const metadata: Metadata = {
-  title: "良平アワード2026 受賞者|良平アワード",
-  description:
-    "良平アワード2026の受賞者をご紹介します。医療現場で日々積み重ねられる誠実な行いに光を当てます。",
-};
-
-const PENDING_TEXT = "発表後に掲載します";
-
 /**
- * 良平アワード2026 受賞者ページ(案4a・モック5b/5c)。
- * 発表前(awardeesPublished: false): 縦書きの発表予告(awardeesNotice.teaserTitle)+光の粒。
- * 発表後: 受賞者カード(輪郭数字+写真枠+部門+氏名+所属+各コメント)。
- * 動画は掲載しない(方針確定)。架空の受賞者を作らないこと。
+ * 良平アワード2026 受賞者ページ。
+ * 発表後: 部門ごとに受賞者カード(輪郭数字+氏名+所属+取り組みタイトル)。
+ * 写真・受賞理由・コメントは data/awardees.ts に追加すると表示される。
+ * 発表前(awardeesPublished: false): 縦書きの発表予告+光の粒。
  */
 export default function Awardees2026Page() {
   const published = siteStatus.awardeesPublished && awardees2026.length > 0;
+
+  /** 掲載順を保ったまま部門ごとにまとめる */
+  const divisions = [...new Set(awardees2026.map((a) => a.category))];
 
   return (
     <div className="bg-navy-deep min-h-svh">
@@ -64,12 +64,19 @@ export default function Awardees2026Page() {
         <h1 className="mt-4 font-serif text-ivory text-3xl md:text-4xl tracking-wider">
           良平アワード2026 <span className="whitespace-nowrap">受賞者</span>
         </h1>
+        {published && (
+          <p className="mt-6 text-ivory/70 text-sm md:text-base leading-relaxed">
+            医療の現場で積み重ねられてきた、
+            <br className="sm:hidden" />
+            {awardees2026.length}の取り組みに光が当たりました。
+          </p>
+        )}
         <div aria-hidden="true" className="mx-auto mt-8 h-px w-14 bg-gold/60" />
       </div>
 
-      <div className="mx-auto max-w-4xl px-5 md:px-8 pb-20 md:pb-28">
+      <div className="mx-auto max-w-3xl px-5 md:px-8 pb-20 md:pb-28">
         {!published ? (
-          /* 発表前(モック5b): 縦書き2列+光の粒 */
+          /* 発表前: 縦書き2列+光の粒 */
           <div className="relative overflow-hidden rounded-2xl border border-gold/20 bg-navy px-6 py-16 md:py-24 text-center">
             <div aria-hidden="true" className="absolute inset-0">
               <div
@@ -84,7 +91,6 @@ export default function Awardees2026Page() {
               <span className="spark" style={{ left: "72%", width: 4, height: 4, animationDelay: "5.8s" }} />
             </div>
 
-            {/* 縦書き2列(右列→左列の順で読む)。「光」のみgoldtext */}
             <p className="vertical-heading relative inline-block font-serif text-ivory text-2xl md:text-3xl leading-[2]">
               <VerticalNoticeTitle text={awardeesNotice.teaserTitle} />
             </p>
@@ -99,72 +105,124 @@ export default function Awardees2026Page() {
             </Link>
           </div>
         ) : (
-          /* 発表後(モック5c): 受賞者カード */
-          <ul className="space-y-14 md:space-y-20">
-            {awardees2026.map((awardee, index) => (
-              <li
-                key={awardee.name}
-                className="relative rounded-2xl bg-navy border border-gold/25 overflow-hidden"
-              >
-                <article className="grid grid-cols-1 md:grid-cols-5">
-                  <div className="md:col-span-2 relative">
-                    {awardee.photo ? (
-                      <Image
-                        src={awardee.photo}
-                        alt={`${awardee.name}さんの写真`}
-                        width={640}
-                        height={800}
-                        className="w-full h-full object-cover aspect-[4/5]"
-                      />
-                    ) : (
-                      <PhotoPlaceholder className="w-full h-full aspect-[4/5]" />
-                    )}
-                    <span aria-hidden="true" className="gold-inner-frame" />
-                  </div>
-                  <div className="md:col-span-3 px-6 py-8 md:px-10 md:py-10">
-                    <p
+          /* 発表後: 部門ごとの受賞者カード */
+          <div className="space-y-16 md:space-y-20">
+            {divisions.map((division) => {
+              const members = awardees2026.filter(
+                (a) => a.category === division,
+              );
+              return (
+                <section key={division} aria-label={division}>
+                  {/* 部門見出し */}
+                  <h2 className="flex items-center gap-4">
+                    <span className="font-serif text-gold-soft text-lg md:text-xl tracking-[0.25em]">
+                      {division}
+                    </span>
+                    <span
                       aria-hidden="true"
-                      className="outline-number text-4xl md:text-5xl leading-none"
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <p className="mt-4 text-xs tracking-[0.25em] text-gold-soft uppercase">
-                      {awardee.category}
-                    </p>
-                    <h2 className="mt-2 font-serif text-ivory text-2xl tracking-wider">
-                      {awardee.name}
-                    </h2>
-                    <p className="mt-1 text-sm text-ivory/60">
-                      {awardee.affiliation}
-                    </p>
+                      className="h-px flex-1 bg-gradient-to-r from-gold/50 to-transparent"
+                    />
+                  </h2>
 
-                    <div className="mt-6">
-                      <h3 className="font-serif text-gold-soft text-base">受賞理由</h3>
-                      <p className="mt-2 text-sm md:text-base text-ivory/85">
-                        {awardee.reason ?? PENDING_TEXT}
-                      </p>
-                    </div>
-                    <div className="mt-6">
-                      <h3 className="font-serif text-gold-soft text-base">
-                        推薦者からのコメント
-                      </h3>
-                      <p className="mt-2 text-sm md:text-base text-ivory/85">
-                        {awardee.nominatorComment ?? PENDING_TEXT}
-                      </p>
-                    </div>
-                    <div className="mt-6">
-                      <h3 className="font-serif text-gold-soft text-base">
-                        ご本人のコメント
-                      </h3>
-                      <p className="mt-2 text-sm md:text-base text-ivory/85">
-                        {awardee.awardeeComment ?? PENDING_TEXT}
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
+                  <ul className="mt-6 space-y-5 md:space-y-6 list-none">
+                    {members.map((awardee, index) => (
+                      <li
+                        key={awardee.name}
+                        className="relative overflow-hidden rounded-2xl bg-navy border border-gold/25"
+                      >
+                        <span aria-hidden="true" className="gold-inner-frame" />
+                        <article
+                          className={
+                            awardee.photo
+                              ? "grid grid-cols-1 md:grid-cols-5"
+                              : ""
+                          }
+                        >
+                          {awardee.photo && (
+                            <div className="md:col-span-2 relative">
+                              <Image
+                                src={awardee.photo}
+                                alt={`${awardee.name}の写真`}
+                                width={640}
+                                height={800}
+                                className="w-full h-full object-cover aspect-[4/3] md:aspect-auto"
+                              />
+                            </div>
+                          )}
+                          <div
+                            className={`px-6 py-7 md:px-9 md:py-8 ${
+                              awardee.photo ? "md:col-span-3" : ""
+                            }`}
+                          >
+                            <div className="flex items-start gap-5">
+                              <p
+                                aria-hidden="true"
+                                className="outline-number shrink-0 text-4xl md:text-5xl leading-none pt-1"
+                              >
+                                {String(index + 1).padStart(2, "0")}
+                              </p>
+                              <div className="min-w-0">
+                                <h3 className="font-serif text-ivory text-xl md:text-2xl tracking-wide leading-relaxed">
+                                  {awardee.name}
+                                </h3>
+                                <p className="mt-1.5 text-sm text-ivory/60">
+                                  {awardee.affiliation}
+                                </p>
+                                {awardee.title && (
+                                  <p className="mt-4 border-l border-gold/50 pl-4 font-serif text-gold-soft text-sm md:text-base leading-relaxed">
+                                    {awardee.title}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            {awardee.reason && (
+                              <div className="mt-6">
+                                <h4 className="font-serif text-gold-soft text-sm tracking-wider">
+                                  受賞理由
+                                </h4>
+                                <p className="mt-2 text-sm md:text-base text-ivory/85 leading-relaxed">
+                                  {awardee.reason}
+                                </p>
+                              </div>
+                            )}
+                            {awardee.nominatorComment && (
+                              <div className="mt-5">
+                                <h4 className="font-serif text-gold-soft text-sm tracking-wider">
+                                  推薦者からのコメント
+                                </h4>
+                                <p className="mt-2 text-sm md:text-base text-ivory/85 leading-relaxed">
+                                  {awardee.nominatorComment}
+                                </p>
+                              </div>
+                            )}
+                            {awardee.awardeeComment && (
+                              <div className="mt-5">
+                                <h4 className="font-serif text-gold-soft text-sm tracking-wider">
+                                  ご本人のコメント
+                                </h4>
+                                <p className="mt-2 text-sm md:text-base text-ivory/85 leading-relaxed">
+                                  {awardee.awardeeComment}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </article>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              );
+            })}
+
+            <p className="text-center text-ivory/60 text-sm leading-relaxed">
+              受賞おめでとうございます。
+              <br className="sm:hidden" />
+              表彰は{eventInfo.title}
+              ({eventInfo.date && `${eventInfo.date}・`}
+              {eventInfo.venue})にて行います。
+            </p>
+          </div>
         )}
       </div>
     </div>
