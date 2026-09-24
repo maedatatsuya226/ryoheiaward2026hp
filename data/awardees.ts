@@ -42,7 +42,7 @@ export const awardees2026: Awardee[] = [
     title: "栄養管理の質の向上に寄与した栄養科の長年にわたる功績",
   },
   {
-    name: "西口 沙也加",
+    name: "西口 沙也佳",
     affiliation: "新久喜総合病院 / 看護部",
     category: "看護部門",
     title: "乳がん看護認定看護師としての実践～患者支援・後進育成を通して～",
